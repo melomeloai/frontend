@@ -1,11 +1,12 @@
-import { useAuth, useClerk, useSignIn } from "@clerk/clerk-react";
+import { Route, Routes } from "react-router-dom";
 
-import { Header } from "./components/header";
-import { MainContent } from "./components/main-content";
+import { Header } from "./components/header/header";
 import { PricingTable } from "./components/price-table";
 import { ThemeProvider } from "./components/theme-provider";
 import { useSubscription } from "./hooks/useSubscription";
 import { useUser } from "./hooks/useUser";
+import { MainContent } from "./pages/main-page";
+import PricingPage from "./pages/pricing-page";
 
 function App() {
   const { user } = useUser();
@@ -29,14 +30,18 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Header />
-      <MainContent
-        onUploadClick={handleUploadClick}
-        onGenerateClick={handleGenerateClick}
-      />
-      <PricingTable
-        currentPlan={subscription?.currentPlan}
-        onUpgrade={(plan) => alert(`Upgrade to ${plan} plan (todo)`)}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MainContent
+              onUploadClick={handleUploadClick}
+              onGenerateClick={handleGenerateClick}
+            />
+          }
+        />
+        <Route path="/pricing" element={<PricingPage />} />
+      </Routes>
     </ThemeProvider>
   );
 }
