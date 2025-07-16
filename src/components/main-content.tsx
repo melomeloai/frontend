@@ -10,7 +10,7 @@ export function MainContent({
   onGenerateClick,
 }: MainContentProps) {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 pt-16">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-16">
       <h1 className="text-4xl font-bold mb-8 text-center max-w-xl">
         Welcome to AI Music Generator
         <br />
@@ -22,6 +22,6 @@ export function MainContent({
           Generate Music
         </Button>
       </div>
-    </main>
+    </div>
   );
 }
