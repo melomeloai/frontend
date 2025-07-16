@@ -1,4 +1,4 @@
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth, useClerk, useSignIn } from "@clerk/clerk-react";
 
 import { Header } from "./components/header";
 import { MainContent } from "./components/main-content";
@@ -17,6 +17,7 @@ function App() {
   }
 
   async function handleGenerateClick() {
+    alert("Generate button clicked (todo)");
     console.log(
       "Generate button clicked, current user:",
       user,
@@ -35,7 +36,6 @@ function App() {
       <PricingTable
         currentPlan={subscription?.currentPlan}
         onUpgrade={(plan) => alert(`Upgrade to ${plan} plan (todo)`)}
-        onUnauthenticatedSubscribe={() => alert("Redirect to sign in (todo)")}
       />
     </ThemeProvider>
   );
