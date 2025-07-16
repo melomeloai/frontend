@@ -8,7 +8,8 @@ import { SignedIn, SignedOut, useClerk } from "@clerk/clerk-react";
 
 interface PricingTableProps {
   currentPlan?: PlanType; // optional to support unauthenticated users
-  onUpgrade: (plan: PlanType) => void;
+  onPlanSubscribe: () => void; // callback for unauthenticated users
+  onPlanChange: (plan: PlanType) => void;
 }
 
 type Plan = {
@@ -49,7 +50,11 @@ const plans: Plan[] = [
   },
 ];
 
-export function PricingTable({ currentPlan, onUpgrade }: PricingTableProps) {
+export function PricingTable({
+  currentPlan,
+  onPlanSubscribe,
+  onPlanChange,
+}: PricingTableProps) {
   const { openSignIn } = useClerk();
   const planIdMap: Record<PlanType, Plan> = plans.reduce((acc, plan) => {
     acc[plan.id] = plan;
@@ -83,8 +88,8 @@ export function PricingTable({ currentPlan, onUpgrade }: PricingTableProps) {
                 <SignedOut>
                   <Button
                     className="w-full mt-2"
-                    // redirect to sign in
-                    onClick={() => openSignIn()}
+                    // open sign-in with redirect to pricing page
+                    onClick={onPlanSubscribe}
                   >
                     Subscribe
                   </Button>
@@ -98,7 +103,7 @@ export function PricingTable({ currentPlan, onUpgrade }: PricingTableProps) {
                   ) : (
                     <Button
                       className="w-full mt-2"
-                      onClick={() => onUpgrade(plan.id)}
+                      onClick={() => onPlanChange(plan.id)}
                     >
                       {planIdMap[plan.id].order < planIdMap[currentPlan!]?.order
                         ? "Downgrade"

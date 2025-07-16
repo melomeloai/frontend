@@ -17,7 +17,6 @@ export function Header() {
           Pricing
         </Link>
       </div>
-      <SignedIn></SignedIn>
       <SignedOut>
         <Button onClick={() => openSignIn()}>Sign In</Button>
       </SignedOut>
