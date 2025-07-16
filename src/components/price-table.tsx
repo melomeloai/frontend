@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { PlanType } from "@/types/subscription";
-import { SignedIn, SignedOut, useClerk } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 interface PricingTableProps {
   currentPlan?: PlanType; // optional to support unauthenticated users
@@ -55,7 +55,6 @@ export function PricingTable({
   onPlanSubscribe,
   onPlanChange,
 }: PricingTableProps) {
-  const { openSignIn } = useClerk();
   const planIdMap: Record<PlanType, Plan> = plans.reduce((acc, plan) => {
     acc[plan.id] = plan;
     return acc;

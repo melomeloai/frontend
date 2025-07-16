@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Header } from "./components/header/header";
-import { PricingTable } from "./components/price-table";
 import { ThemeProvider } from "./components/theme-provider";
 import { useSubscription } from "./hooks/useSubscription";
 import { useUser } from "./hooks/useUser";
