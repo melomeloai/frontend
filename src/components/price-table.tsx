@@ -85,12 +85,8 @@ export function PricingTable({
                 <div className="font-semibold mb-2">{plan.price}</div>
 
                 <SignedOut>
-                  <Button
-                    className="w-full mt-2"
-                    // open sign-in with redirect to pricing page
-                    onClick={onPlanSubscribe}
-                  >
-                    Subscribe
+                  <Button className="w-full mt-2" onClick={onPlanSubscribe}>
+                    {plan.id === "FREE" ? "Start For Free" : "Subscribe"}
                   </Button>
                 </SignedOut>
 
@@ -104,7 +100,10 @@ export function PricingTable({
                       className="w-full mt-2"
                       onClick={() => onPlanChange(plan.id)}
                     >
-                      {planIdMap[plan.id].order < planIdMap[currentPlan!]?.order
+                      {plan.id === "FREE"
+                        ? "Cancel Subscription"
+                        : planIdMap[plan.id].order <
+                          planIdMap[currentPlan!]?.order
                         ? "Downgrade"
                         : "Upgrade"}
                     </Button>
