@@ -67,9 +67,11 @@ export interface PricingPlan {
 }
 
 // Stripe Types - Updated based on actual API
+export type BillingCycle = "MONTHLY" | "YEARLY";
+
 export interface UpgradeRequest {
   planType: PlanType;
-  billingCycle: string; // API uses string instead of 'monthly' | 'yearly'
+  billingCycle: BillingCycle; // Now using enum values MONTHLY/YEARLY
 }
 
 export interface CheckoutSessionResponse {

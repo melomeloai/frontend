@@ -25,6 +25,7 @@ function App() {
             <Routes>
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route path={ROUTES.PRICING} element={<Pricing />} />
+              <Route path={ROUTES.ACCOUNT} element={<Pricing />} />
               <Route path={ROUTES.LIBRARY} element={<Library />} />
             </Routes>
           </Layout>

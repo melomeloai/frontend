@@ -32,14 +32,10 @@ export const UserMenu: React.FC = () => {
     try {
       const response = await subscriptionAPI.getCustomerPortal();
       window.open(response.portalUrl, "_blank");
-      toast("Redirecting to customer portal...", {
-        description: "You will be redirected to manage your subscription.",
-      });
+      toast.success("Redirecting to customer portal...");
     } catch (error) {
       console.error("Failed to open customer portal:", error);
-      toast.error("Error", {
-        description: "Failed to open customer portal. Please try again.",
-      });
+      toast.error("Failed to open customer portal. Please try again.");
     } finally {
       setIsLoading(false);
     }

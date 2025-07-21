@@ -28,7 +28,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     type: "PRO",
     description: "Great for regular creators and hobbyists",
     monthlyPrice: 9.99,
-    yearlyPrice: 99.99,
+    yearlyPrice: 99.0,
     resetCredits: 500,
     resetPeriod: "monthly",
     popular: true,
@@ -46,7 +46,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     type: "PREMIUM",
     description: "For professional creators and businesses",
     monthlyPrice: 29.99,
-    yearlyPrice: 299.99,
+    yearlyPrice: 299.0,
     resetCredits: 2000,
     resetPeriod: "monthly",
     features: [
@@ -64,6 +64,7 @@ export const PRICING_PLANS: PricingPlan[] = [
 export const ROUTES = {
   HOME: "/",
   PRICING: "/pricing",
+  ACCOUNT: "/account",
   LIBRARY: "/library",
 } as const;
 
