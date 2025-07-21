@@ -51,26 +51,30 @@ export const Pricing: React.FC = () => {
 
       {/* FAQ or Additional Info Section */}
       <div className="bg-card border border-border rounded-lg p-6 max-w-4xl mx-auto">
-        <h3 className="text-lg font-semibold mb-4">
+        <h3 className="text-lg font-semibold mb-4 text-card-foreground">
           Frequently Asked Questions
         </h3>
         <div className="grid md:grid-cols-2 gap-6 text-sm">
           <div>
-            <h4 className="font-medium mb-2">What are credits?</h4>
+            <h4 className="font-medium mb-2 text-card-foreground">
+              What are credits?
+            </h4>
             <p className="text-muted-foreground">
               Credits are used to generate AI music. Different generation tasks
               may consume different amounts of credits.
             </p>
           </div>
           <div>
-            <h4 className="font-medium mb-2">Can I change my plan anytime?</h4>
+            <h4 className="font-medium mb-2 text-card-foreground">
+              Can I change my plan anytime?
+            </h4>
             <p className="text-muted-foreground">
               Yes! You can upgrade, downgrade, or cancel your subscription at
               any time. Changes are prorated automatically.
             </p>
           </div>
           <div>
-            <h4 className="font-medium mb-2">
+            <h4 className="font-medium mb-2 text-card-foreground">
               What happens to unused credits?
             </h4>
             <p className="text-muted-foreground">
@@ -79,7 +83,7 @@ export const Pricing: React.FC = () => {
             </p>
           </div>
           <div>
-            <h4 className="font-medium mb-2">
+            <h4 className="font-medium mb-2 text-card-foreground">
               Can I purchase additional credits?
             </h4>
             <p className="text-muted-foreground">
