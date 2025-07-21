@@ -16,19 +16,14 @@ import { useClerk, useUser } from "@clerk/clerk-react";
 
 export const UserMenu: React.FC = () => {
   const { user } = useUser();
-  const { signOut } = useClerk();
+  const { openUserProfile, signOut } = useClerk();
   const { subscriptionAPI } = useApi();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleManageAccount = () => {
     // Open Clerk's user profile modal
     if (user) {
-      window.open(
-        `${
-          import.meta.env.VITE_CLERK_DOMAIN || "https://accounts.clerk.com"
-        }/user`,
-        "_blank"
-      );
+      openUserProfile();
     }
   };
 
