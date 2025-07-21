@@ -38,11 +38,8 @@ export function useClerkSWR<T>(url: string) {
         Authorization: `Bearer ${token}`,
       },
     });
-    const json: ApiResponse<T> = await res.json();
-    if (!json.success) {
-      throw new ApiError(json.code, json.message ?? "Unknown error");
-    }
-    return json.data;
+    const json: T = await res.json();
+    return json;
   };
 
   return useSWR<T>(isSignedIn ? url : null, fetcher);

@@ -1,47 +1,37 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import { Header } from "./components/header/header";
-import { ThemeProvider } from "./components/theme-provider";
-import { useSubscription } from "./hooks/useSubscription";
-import { useUser } from "./hooks/useUser";
-import { MainContent } from "./pages/main-page";
-import PricingPage from "./pages/pricing-page";
+import { Layout } from "@/components/layout/Layout";
+import { Toaster } from "@/components/ui/sonner";
+import { Home } from "@/pages/Home";
+import { Library } from "@/pages/Library";
+import { Pricing } from "@/pages/Pricing";
+import { ROUTES } from "@/utils/constants";
+import { ClerkProvider } from "@clerk/clerk-react";
+
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!clerkPubKey) {
+  throw new Error("Missing Clerk Publishable Key");
+}
 
 function App() {
-  const { user } = useUser();
-
-  const { subscription } = useSubscription();
-
-  function handleUploadClick() {
-    alert("Open file picker / upload dialog (todo)");
-  }
-
-  async function handleGenerateClick() {
-    alert("Generate button clicked (todo)");
-    console.log(
-      "Generate button clicked, current user:",
-      user,
-      "subscription:",
-      subscription
-    );
-  }
-
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <MainContent
-              onUploadClick={handleUploadClick}
-              onGenerateClick={handleGenerateClick}
-            />
-          }
-        />
-        <Route path="/pricing" element={<PricingPage />} />
-      </Routes>
-    </ThemeProvider>
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <Router>
+        <div className="dark">
+          {" "}
+          {/* Force dark mode */}
+          <Layout>
+            <Routes>
+              <Route path={ROUTES.HOME} element={<Home />} />
+              <Route path={ROUTES.PRICING} element={<Pricing />} />
+              <Route path={ROUTES.LIBRARY} element={<Library />} />
+            </Routes>
+          </Layout>
+          <Toaster />
+        </div>
+      </Router>
+    </ClerkProvider>
   );
 }
 

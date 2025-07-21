@@ -1,13 +1,42 @@
-import { API_BASE_URL, useClerkSWR } from "@/lib/api";
-import type { Subscription } from "@/types/subscription";
+import { useCallback, useEffect, useState } from "react";
 
-export function useSubscription() {
-  const { data, error, isLoading } = useClerkSWR<Subscription>(
-    API_BASE_URL + "/users/me/subscription"
-  );
+import type { SubscriptionInfoResponse } from "@/types";
+
+import { useApi } from "./useApi";
+
+export const useSubscription = () => {
+  const [subscription, setSubscription] =
+    useState<SubscriptionInfoResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { subscriptionAPI } = useApi();
+
+  const fetchSubscription = useCallback(async () => {
+    try {
+      setError(null);
+      const response = await subscriptionAPI.getSubscriptionInfo();
+      setSubscription(response);
+    } catch (err) {
+      setError("Failed to load subscription");
+      console.error("Subscription fetch error:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [subscriptionAPI]);
+
+  const refetch = useCallback(() => {
+    setIsLoading(true);
+    fetchSubscription();
+  }, [fetchSubscription]);
+
+  useEffect(() => {
+    fetchSubscription();
+  }, [fetchSubscription]);
+
   return {
-    subscription: data,
-    error,
+    subscription,
     isLoading,
+    error,
+    refetch,
   };
-}
+};
