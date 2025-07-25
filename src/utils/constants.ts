@@ -4,6 +4,43 @@ import type { PricingPlan } from "@/types";
 export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
+// Routes
+export const ROUTES = {
+  HOME: "/",
+  CREATE: "/create",
+  PRICING: "/pricing",
+  ACCOUNT: "/account",
+  LIBRARY: "/library",
+} as const;
+
+// Landing Page Features
+export const LANDING_FEATURES = [
+  {
+    icon: "🎯",
+    title: "Any Moment",
+    description:
+      "From workout sessions to coffee breaks, describe any scenario and get the perfect soundtrack",
+  },
+  {
+    icon: "⚡",
+    title: "Lightning Fast",
+    description:
+      "Generate professional-quality music in under 30 seconds with our advanced AI technology",
+  },
+  {
+    icon: "🎨",
+    title: "Your Style",
+    description:
+      "Completely customizable output that matches your unique taste and creative vision",
+  },
+  {
+    icon: "🎵",
+    title: "Pro Quality",
+    description:
+      "Studio-grade audio quality ready for any project, from personal use to commercial applications",
+  },
+];
+
 // Plan Configuration
 export const PRICING_PLANS: PricingPlan[] = [
   {
@@ -59,14 +96,6 @@ export const PRICING_PLANS: PricingPlan[] = [
     ],
   },
 ];
-
-// Routes
-export const ROUTES = {
-  HOME: "/",
-  PRICING: "/pricing",
-  ACCOUNT: "/account",
-  LIBRARY: "/library",
-} as const;
 
 // Credit Display Settings
 export const CREDIT_REFRESH_INTERVAL = 30000; // 30 seconds

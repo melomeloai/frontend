@@ -6,8 +6,9 @@ import { ROUTES } from "@/utils/constants";
 
 const navigationItems = [
   { name: "Home", href: ROUTES.HOME },
-  { name: "Pricing", href: ROUTES.PRICING },
+  { name: "Create", href: ROUTES.CREATE },
   { name: "Library", href: ROUTES.LIBRARY },
+  { name: "Pricing", href: ROUTES.PRICING },
 ];
 
 export const Navigation: React.FC = () => {

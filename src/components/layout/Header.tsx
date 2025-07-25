@@ -17,9 +17,9 @@ export const Header: React.FC = () => {
           <div className="flex items-center">
             <Link
               to={ROUTES.HOME}
-              className="text-xl font-bold text-foreground hover:text-primary transition-colors"
+              className="text-xl font-bold text-foreground bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
             >
-              AI Music
+              Melomelo.AI
             </Link>
           </div>
 

@@ -8,6 +8,8 @@ import { Pricing } from "@/pages/Pricing";
 import { ROUTES } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
 
+import { Create } from "./pages/Create";
+
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!clerkPubKey) {
@@ -24,9 +26,10 @@ function App() {
           <Layout>
             <Routes>
               <Route path={ROUTES.HOME} element={<Home />} />
+              <Route path={ROUTES.CREATE} element={<Create />} />
+              <Route path={ROUTES.LIBRARY} element={<Library />} />
               <Route path={ROUTES.PRICING} element={<Pricing />} />
               <Route path={ROUTES.ACCOUNT} element={<Pricing />} />
-              <Route path={ROUTES.LIBRARY} element={<Library />} />
             </Routes>
           </Layout>
           <Toaster />
