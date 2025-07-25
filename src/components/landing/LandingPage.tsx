@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
-import { LANDING_FEATURES } from "@/utils/constants";
+import { LANDING_FEATURES, ROUTES } from "@/utils/constants";
 
 interface FeatureCardProps {
   icon: string;
@@ -28,13 +29,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 };
 
 export const LandingPage: React.FC = () => {
-  const handleStartCreating = () => {
-    window.location.href = "/create";
-  };
-
-  const handleExploreLibrary = () => {
-    window.location.href = "/library";
-  };
 
   return (
     <div className="h-[calc(100vh-80px)] flex flex-col justify-center px-6 py-6">
@@ -63,20 +57,22 @@ export const LandingPage: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button
-              onClick={handleStartCreating}
-              className="w-full sm:w-auto px-8 py-6 text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 focus:ring-2 focus:ring-blue-400/50 text-white"
-            >
-              🎵 Start Creating
-            </Button>
+            <Link to={ROUTES.CREATE}>
+              <Button
+                className="w-full sm:w-auto px-8 py-6 text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 focus:ring-2 focus:ring-blue-400/50 text-white"
+              >
+                🎵 Start Creating
+              </Button>
+            </Link>
 
-            <Button
-              onClick={handleExploreLibrary}
-              variant="outline"
-              className="w-full sm:w-auto px-8 py-6 text-lg font-semibold bg-white/[0.1] border-white/20 hover:bg-white/[0.15] hover:border-white/30 rounded-[10px] transition-all duration-200 transform hover:scale-105 text-white hover:text-white"
-            >
-              🎧 Explore Library
-            </Button>
+            <Link to={ROUTES.LIBRARY}>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto px-8 py-6 text-lg font-semibold bg-white/[0.1] border-white/20 hover:bg-white/[0.15] hover:border-white/30 rounded-[10px] transition-all duration-200 transform hover:scale-105 text-white hover:text-white"
+              >
+                🎧 Explore Library
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

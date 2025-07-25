@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
           <Navigation />
 
           {/* Right side - Credits, Auth */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 min-w-[200px] justify-end">
             <SignedIn>
               <CreditDisplay />
               <UserMenu />

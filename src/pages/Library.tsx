@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/utils/constants";
 
 export const Library: React.FC = () => {
   const dummyTracks = [
@@ -79,12 +81,13 @@ export const Library: React.FC = () => {
       </div>
 
       <div className="text-center">
-        <Button
-          onClick={() => (window.location.href = "/create")}
-          className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 text-white"
-        >
-          🎵 Create New Track
-        </Button>
+        <Link to={ROUTES.CREATE}>
+          <Button
+            className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 text-white"
+          >
+            🎵 Create New Track
+          </Button>
+        </Link>
       </div>
     </div>
   );
