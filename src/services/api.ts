@@ -4,11 +4,14 @@ import type {
   CheckoutSessionResponse,
   CreditInfoResponse,
   CustomerPortalResponse,
+  MusicGenerationRequest,
+  MusicGenerationResponse,
+  MusicTaskResponse,
   SubscriptionInfoResponse,
   UpgradeRequest,
   UserResponse,
-} from "../types";
-import { API_BASE_URL } from "../utils/constants";
+} from "@/types";
+import { API_BASE_URL } from "@/utils/constants";
 
 // Create axios instance
 const api = axios.create({
@@ -99,6 +102,26 @@ export const createAuthenticatedAPI = (
         return response.data;
       },
     },
+
+    // Music Generation API
+    musicAPI: {
+      // POST /api/music/generate
+      generateMusic: async (
+        request: MusicGenerationRequest
+      ): Promise<MusicGenerationResponse> => {
+        const response = await authenticatedApi.post(
+          "/music/generate",
+          request
+        );
+        return response.data;
+      },
+
+      // GET /api/music/tasks/:taskId
+      getTask: async (taskId: string): Promise<MusicTaskResponse> => {
+        const response = await authenticatedApi.get(`/music/tasks/${taskId}`);
+        return response.data;
+      },
+    },
   };
 };
 
@@ -135,3 +158,18 @@ export const subscriptionAPI = {
     return response.data;
   },
 };
+
+// Music API - Commented out until backend is ready
+// export const musicAPI = {
+//   generateMusic: async (
+//     request: MusicGenerationRequest
+//   ): Promise<MusicGenerationResponse> => {
+//     const response = await api.post("/music/generate", request);
+//     return response.data;
+//   },
+
+//   getTask: async (taskId: string): Promise<MusicTaskResponse> => {
+//     const response = await api.get(`/music/tasks/${taskId}`);
+//     return response.data;
+//   },
+// };

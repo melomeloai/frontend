@@ -81,3 +81,43 @@ export interface CheckoutSessionResponse {
 export interface CustomerPortalResponse {
   portalUrl: string;
 }
+
+// Music Generation Types - Simplified for mock system
+export interface MusicGenerationRequest {
+  description: string;
+  [key: string]: any; // Allow any additional properties for flexibility
+}
+
+export interface MusicGenerationResponse {
+  taskId: string;
+}
+
+export type TaskStatus = "pending" | "processing" | "completed" | "failed";
+
+export interface MusicTask {
+  taskId: string;
+  status: TaskStatus;
+  progress?: number;
+  result?: {
+    audioUrl: string;
+    title: string;
+    duration: number;
+  };
+  error?: string;
+  createdAt: string;
+  completedAt?: string;
+}
+
+export interface MusicTaskResponse {
+  taskId: string;
+  status: TaskStatus;
+  progress?: number;
+  result?: {
+    audioUrl: string;
+    title: string;
+    duration: number;
+  };
+  error?: string;
+  createdAt: string;
+  completedAt?: string;
+}
