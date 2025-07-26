@@ -62,7 +62,7 @@ export const PricingTable: React.FC = () => {
     <div className="space-y-8">
       {/* Billing Cycle Toggle */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-4 p-4">
-        <div className="flex items-center gap-4 min-h-[44px]">
+        <div className="flex items-center gap-4">
           <Label
             htmlFor="billing-toggle"
             className={cn(
@@ -80,7 +80,6 @@ export const PricingTable: React.FC = () => {
             onCheckedChange={(checked) =>
               setBillingCycle(checked ? "YEARLY" : "MONTHLY")
             }
-            className="shrink-0 h-6 w-12 md:h-7 md:w-14"
           />
           <Label
             htmlFor="billing-toggle"
@@ -93,12 +92,10 @@ export const PricingTable: React.FC = () => {
           >
             Yearly
           </Label>
-        </div>
-        {billingCycle === "YEARLY" && (
           <Badge variant="secondary" className="text-xs px-2 py-1">
             Save up to 17%
           </Badge>
-        )}
+        </div>
       </div>
 
       {/* Pricing Cards */}

@@ -137,11 +137,11 @@
   @media (max-width: 768px) {
     button:not([data-size="sm"]):not([data-size="xs"]), 
     a:not([data-size="sm"]):not([data-size="xs"]) {
-      min-height: 44px;
+      min-height: 1.1rem;
     }
     
     input, textarea, select {
-      min-height: 44px;
+      min-height: 1.1rem;
     }
   }
   
