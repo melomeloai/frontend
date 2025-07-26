@@ -6,30 +6,33 @@ import { CreditDisplay } from "@/components/credits/CreditDisplay";
 import { ROUTES } from "@/utils/constants";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react";
 
+import { MobileNavigation } from "./MobileNavigation";
 import { Navigation } from "./Navigation";
 
 export const Header: React.FC = () => {
   return (
-    <header className="bg-background border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="bg-background border-b border-border sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <Link
               to={ROUTES.HOME}
-              className="text-xl font-bold text-foreground bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+              className="text-lg md:text-xl font-bold text-foreground bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent flex items-center"
             >
               Melomelo.AI
             </Link>
           </div>
 
-          {/* Navigation */}
+          {/* Desktop Navigation */}
           <Navigation />
 
-          {/* Right side - Credits, Auth */}
-          <div className="flex items-center space-x-4 min-w-[200px] justify-end">
+          {/* Right side - Credits, Auth, Mobile Menu */}
+          <div className="flex items-center gap-4 min-w-[120px] md:min-w-[200px] justify-end">
             <SignedIn>
-              <CreditDisplay />
+              <div className="hidden md:block">
+                <CreditDisplay />
+              </div>
               <UserMenu />
             </SignedIn>
 
@@ -40,6 +43,9 @@ export const Header: React.FC = () => {
                 </button>
               </SignInButton>
             </SignedOut>
+
+            {/* Mobile Navigation */}
+            <MobileNavigation />
           </div>
         </div>
       </div>

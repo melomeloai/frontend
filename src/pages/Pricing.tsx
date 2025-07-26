@@ -9,8 +9,8 @@ export const Pricing: React.FC = () => {
     <div className="space-y-12">
       {/* Header Section */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold text-foreground">Choose Your Plan</h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <h1 className="text-2xl md:text-4xl font-bold text-foreground">Choose Your Plan</h1>
+        <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           Start creating amazing music with AI. Choose the plan that fits your
           creative needs.
         </p>
@@ -19,7 +19,7 @@ export const Pricing: React.FC = () => {
       {/* Current Subscription Status (Only for logged in users) */}
       <SignedIn>
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-6 text-center">
+          <h2 className="text-xl md:text-2xl font-semibold mb-6 text-center">
             Your Subscription
           </h2>
           <SubscriptionStatus />
@@ -30,7 +30,7 @@ export const Pricing: React.FC = () => {
       <div>
         <SignedOut>
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Get Started Today</h2>
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">Get Started Today</h2>
             <p className="text-muted-foreground">
               Sign in to subscribe and start creating music with AI
             </p>
@@ -39,7 +39,7 @@ export const Pricing: React.FC = () => {
 
         <SignedIn>
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Available Plans</h2>
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">Available Plans</h2>
             <p className="text-muted-foreground">
               Upgrade, downgrade, or modify your plan anytime
             </p>
@@ -54,12 +54,12 @@ export const Pricing: React.FC = () => {
         <h3 className="text-lg font-semibold mb-4 text-card-foreground">
           Frequently Asked Questions
         </h3>
-        <div className="grid md:grid-cols-2 gap-6 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
             <h4 className="font-medium mb-2 text-card-foreground">
               What are credits?
             </h4>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground leading-relaxed">
               Credits are used to generate AI music. Different generation tasks
               may consume different amounts of credits.
             </p>
@@ -68,7 +68,7 @@ export const Pricing: React.FC = () => {
             <h4 className="font-medium mb-2 text-card-foreground">
               Can I change my plan anytime?
             </h4>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground leading-relaxed">
               Yes! You can upgrade, downgrade, or cancel your subscription at
               any time. Changes are prorated automatically.
             </p>
@@ -77,7 +77,7 @@ export const Pricing: React.FC = () => {
             <h4 className="font-medium mb-2 text-card-foreground">
               What happens to unused credits?
             </h4>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground leading-relaxed">
               Renewable credits reset at the start of each billing period.
               Permanent credits never expire.
             </p>
@@ -86,7 +86,7 @@ export const Pricing: React.FC = () => {
             <h4 className="font-medium mb-2 text-card-foreground">
               Can I purchase additional credits?
             </h4>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground leading-relaxed">
               Pro and Premium users can purchase additional permanent credits
               that never expire.
             </p>

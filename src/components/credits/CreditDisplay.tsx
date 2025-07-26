@@ -43,12 +43,12 @@ export const CreditDisplay: React.FC = () => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Button variant="secondary" size="sm" className="space-x-1">
+        <Button variant="secondary" size="sm" className="gap-1 text-sm px-3 h-9">
           <Coins className="h-4 w-4" />
           <span>{totalCredits}</span>
         </Button>
       </HoverCardTrigger>
-      <HoverCardContent className="w-80">
+      <HoverCardContent className="w-80 text-sm">
         <div className="space-y-3">
           <h4 className="text-sm font-semibold">Credit Balance</h4>
 
@@ -57,19 +57,19 @@ export const CreditDisplay: React.FC = () => {
               <span className="text-sm text-muted-foreground">
                 Renewable Credits
               </span>
-              <Badge variant="secondary">{credits.renewableCredits}</Badge>
+              <Badge variant="secondary" className="text-xs">{credits.renewableCredits}</Badge>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">
                 Permanent Credits
               </span>
-              <Badge variant="outline">{credits.permanentCredits}</Badge>
+              <Badge variant="outline" className="text-xs">{credits.permanentCredits}</Badge>
             </div>
 
             <div className="flex items-center justify-between pt-2 border-t">
               <span className="text-sm font-medium">Total Available</span>
-              <Badge>{totalCredits}</Badge>
+              <Badge className="text-xs">{totalCredits}</Badge>
             </div>
           </div>
 

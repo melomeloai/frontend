@@ -116,5 +116,44 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Mobile-first touch optimization */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Improve button touch targets on mobile */
+  @media (max-width: 768px) {
+    button:not([data-size="sm"]):not([data-size="xs"]), 
+    a:not([data-size="sm"]):not([data-size="xs"]) {
+      min-height: 44px;
+    }
+    
+    input, textarea, select {
+      min-height: 44px;
+    }
+  }
+  
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* iOS Safari viewport fix */
+  @supports (-webkit-touch-callout: none) {
+    .min-h-screen {
+      min-height: -webkit-fill-available;
+    }
   }
 }

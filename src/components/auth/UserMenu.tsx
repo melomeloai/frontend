@@ -63,7 +63,7 @@ export const UserMenu: React.FC = () => {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage src={user.imageUrl} alt={user.fullName || "User"} />
-            <AvatarFallback className="bg-primary text-primary-foreground">
+            <AvatarFallback className="bg-primary text-primary-foreground text-sm">
               {userInitials}
             </AvatarFallback>
           </Avatar>
@@ -75,7 +75,7 @@ export const UserMenu: React.FC = () => {
           <p className="text-sm font-medium leading-none">
             {user.fullName || "User"}
           </p>
-          <p className="text-xs leading-none text-muted-foreground">
+          <p className="text-xs leading-none text-muted-foreground truncate">
             {user.emailAddresses[0]?.emailAddress}
           </p>
         </div>

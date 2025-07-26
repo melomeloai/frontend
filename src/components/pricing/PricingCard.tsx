@@ -118,7 +118,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
         </div>
       )}
 
-      <CardHeader className="text-center pb-2">
+      <CardHeader className="text-center pb-2 p-6">
         <CardTitle className="text-xl">{plan.name}</CardTitle>
         <CardDescription className="text-sm">
           {plan.description}
@@ -128,7 +128,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
           <div className="flex items-baseline justify-center">
             <span className="text-3xl font-bold">${price}</span>
             {!isFree && (
-              <span className="text-muted-foreground ml-1">
+              <span className="text-muted-foreground ml-1 text-sm">
                 /{billingCycle === "YEARLY" ? "year" : "month"}
               </span>
             )}
@@ -147,7 +147,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
         </div>
       </CardHeader>
 
-      <CardContent className="flex-grow">
+      <CardContent className="flex-grow p-6 pt-2">
         <ul className="space-y-3">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-start">
@@ -158,7 +158,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
               )}
               <span
                 className={cn(
-                  "text-sm",
+                  "text-sm leading-relaxed",
                   feature.included
                     ? "text-foreground"
                     : "text-muted-foreground line-through"
@@ -171,9 +171,9 @@ export const PricingCard: React.FC<PricingCardProps> = ({
         </ul>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="p-6 pt-0">
         <Button
-          className="w-full"
+          className="w-full h-11 text-base"
           variant={getButtonVariant()}
           disabled={isButtonDisabled()}
           onClick={handleClick}

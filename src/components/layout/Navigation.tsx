@@ -15,13 +15,13 @@ export const Navigation: React.FC = () => {
   const location = useLocation();
 
   return (
-    <nav className="hidden md:flex space-x-8">
+    <nav className="hidden md:flex gap-8">
       {navigationItems.map((item) => (
         <Link
           key={item.name}
           to={item.href}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
+            "text-base font-medium transition-colors hover:text-primary",
             location.pathname === item.href
               ? "text-foreground border-b-2 border-primary"
               : "text-muted-foreground"
