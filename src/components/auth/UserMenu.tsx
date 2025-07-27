@@ -2,8 +2,8 @@ import { CreditCard, ExternalLink, LogOut, User } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-import { Button } from "@/components//ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
