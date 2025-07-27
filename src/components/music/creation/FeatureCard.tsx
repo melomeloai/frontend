@@ -5,7 +5,7 @@ interface Badge {
   variant: "recommended" | "free" | "advanced";
 }
 
-interface CreationCardProps {
+interface FeatureCardProps {
   title: string;
   description: string;
   icon: string;
@@ -33,7 +33,7 @@ const hoverEffects = {
   disabled: "",
 };
 
-export const CreationCard: React.FC<CreationCardProps> = ({
+export const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
   icon,
