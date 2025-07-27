@@ -66,7 +66,7 @@ export const PricingTable: React.FC = () => {
           <Label
             htmlFor="billing-toggle"
             className={cn(
-              "text-base md:text-lg font-medium cursor-pointer",
+              "text-base font-medium cursor-pointer",
               billingCycle === "MONTHLY"
                 ? "text-foreground"
                 : "text-muted-foreground"
@@ -84,7 +84,7 @@ export const PricingTable: React.FC = () => {
           <Label
             htmlFor="billing-toggle"
             className={cn(
-              "text-base md:text-lg font-medium cursor-pointer",
+              "text-base font-medium cursor-pointer",
               billingCycle === "YEARLY"
                 ? "text-foreground"
                 : "text-muted-foreground"

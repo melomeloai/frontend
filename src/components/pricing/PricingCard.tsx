@@ -119,14 +119,14 @@ export const PricingCard: React.FC<PricingCardProps> = ({
       )}
 
       <CardHeader className="text-center pb-2 p-6">
-        <CardTitle className="text-xl">{plan.name}</CardTitle>
+        <CardTitle className="text-2xl">{plan.name}</CardTitle>
         <CardDescription className="text-sm">
           {plan.description}
         </CardDescription>
 
         <div className="mt-4">
           <div className="flex items-baseline justify-center">
-            <span className="text-3xl font-bold">${price}</span>
+            <span className="text-2xl md:text-3xl font-bold">${price}</span>
             {!isFree && (
               <span className="text-muted-foreground ml-1 text-sm">
                 /{billingCycle === "YEARLY" ? "year" : "month"}
