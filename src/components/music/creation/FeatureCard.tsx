@@ -52,7 +52,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
 
   return (
     <div
-      className={`relative backdrop-blur-sm rounded-[20px] p-6 md:p-8 transition-all duration-300 transform border ${
+      className={`relative backdrop-blur-sm rounded-[20px] p-6 transition-all duration-300 transform border ${
         isEnabled ? "hover:scale-[1.02] hover:shadow-2xl" : ""
       } ${cardVariants[isEnabled ? "enabled" : "disabled"]} ${getHoverEffect()} ${className} ${
         !isEnabled ? "overflow-hidden" : ""
@@ -76,7 +76,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
 
         {/* Content */}
         <div className="space-y-3">
-          <h3 className={`text-xl md:text-2xl font-bold ${isEnabled ? "text-foreground" : "text-foreground/70"}`}>
+          <h3 className={`text-2xl font-bold ${isEnabled ? "text-foreground" : "text-foreground/70"}`}>
             {title}
           </h3>
           <p className={`leading-relaxed ${isEnabled ? "text-muted-foreground" : "text-muted-foreground/70"}`}>

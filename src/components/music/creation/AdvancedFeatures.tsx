@@ -44,9 +44,9 @@ export const AdvancedFeatures: React.FC<AdvancedFeaturesProps> = ({
 }) => {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg md:text-xl font-semibold text-foreground text-center">
+      <h2 className="text-xl md:text-2xl font-semibold text-foreground text-center">
         Coming Soon
-      </h3>
+      </h2>
       <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${className}`}>
         {advancedFeatures.map((feature) => (
           <FeatureCard
