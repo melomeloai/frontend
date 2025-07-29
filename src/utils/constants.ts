@@ -16,28 +16,28 @@ export const ROUTES = {
 // Landing Page Features
 export const LANDING_FEATURES = [
   {
-    icon: "🎯",
-    title: "Any Moment",
+    iconName: "FileText",
+    title: "Text to Music",
     description:
-      "From workout sessions to coffee breaks, describe any scenario and get the perfect soundtrack",
+      "Simply describe your needs and AI generates professional-quality music. Low-cost, high-efficiency creative experience",
   },
   {
-    icon: "⚡",
-    title: "Lightning Fast",
+    iconName: "Video",
+    title: "Video AI Soundtrack",
     description:
-      "Generate professional-quality music in under 30 seconds with our advanced AI technology",
+      "Specialized intelligent soundtrack services for YouTube, TikTok, and Instagram short video creators",
   },
   {
-    icon: "🎨",
-    title: "Your Style",
+    iconName: "Users",
+    title: "For All Creators",
     description:
-      "Completely customizable output that matches your unique taste and creative vision",
+      "Serving individual creators and professional production teams, meeting content creation needs of all scales",
   },
   {
-    icon: "🎵",
-    title: "Pro Quality",
+    iconName: "Zap",
+    title: "Ultra-Fast Generation",
     description:
-      "Studio-grade audio quality ready for any project, from personal use to commercial applications",
+      "Generate professional-grade audio in 30 seconds, support multiple export formats, instantly meet creative needs",
   },
 ];
 
@@ -46,14 +46,14 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     name: "Free",
     type: "FREE",
-    description: "Perfect for trying out our AI music generation",
+    description: "Perfect for trying out AI music generation and video soundtracks",
     monthlyPrice: 0,
     yearlyPrice: 0,
     resetCredits: 10,
     resetPeriod: "daily",
     features: [
       { text: "10 credits per day", included: true },
-      { text: "Basic AI music generation", included: true },
+      { text: "Basic AI music and soundtrack generation", included: true },
       { text: "Standard quality output", included: true },
       { text: "Community support", included: true },
       { text: "Advanced features", included: false },
@@ -63,7 +63,7 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     name: "Pro",
     type: "PRO",
-    description: "Great for regular creators and hobbyists",
+    description: "Great for content creators and hobbyists on YouTube, TikTok, Instagram",
     monthlyPrice: 9.99,
     yearlyPrice: 99.0,
     resetCredits: 500,
@@ -71,7 +71,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     popular: true,
     features: [
       { text: "500 credits per month", included: true },
-      { text: "Advanced AI music generation", included: true },
+      { text: "Advanced AI music and video soundtrack generation", included: true },
       { text: "High quality output", included: true },
       { text: "Priority support", included: true },
       { text: "Purchase additional credits", included: true },
@@ -81,14 +81,14 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     name: "Premium",
     type: "PREMIUM",
-    description: "For professional creators and businesses",
+    description: "For professional content creators and production teams",
     monthlyPrice: 29.99,
     yearlyPrice: 299.0,
     resetCredits: 2000,
     resetPeriod: "monthly",
     features: [
       { text: "2000 credits per month", included: true },
-      { text: "Premium AI music generation", included: true },
+      { text: "Premium AI music and professional soundtrack generation", included: true },
       { text: "Highest quality output", included: true },
       { text: "Premium support", included: true },
       { text: "Purchase additional credits", included: true },

@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
               to={ROUTES.HOME}
               className="text-lg md:text-xl font-bold text-foreground bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent flex items-center"
             >
-              Melomelo.AI
+              MeloReels.AI
             </Link>
           </div>
 

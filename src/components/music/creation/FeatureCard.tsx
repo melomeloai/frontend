@@ -1,4 +1,5 @@
 import React from "react";
+import { Rocket } from "lucide-react";
 
 interface Badge {
   text: string;
@@ -8,7 +9,7 @@ interface Badge {
 interface FeatureCardProps {
   title: string;
   description: string;
-  icon: string;
+  icon: React.ReactNode;
   badge?: Badge;
   isEnabled?: boolean;
   showComingSoon?: boolean;
@@ -87,8 +88,9 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
         {/* Coming Soon Badge */}
         {showComingSoon && (
           <div className="text-center">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/[0.05] text-sm text-foreground/60 border border-white/[0.1]">
-              🚀 Coming Soon
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] text-sm text-foreground/60 border border-white/[0.1]">
+              <Rocket className="w-4 h-4" aria-label="Coming soon icon" />
+              <span>Coming Soon</span>
             </span>
           </div>
         )}

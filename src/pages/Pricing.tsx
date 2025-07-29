@@ -11,8 +11,7 @@ export const Pricing: React.FC = () => {
       <div className="text-center space-y-4">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground">Choose Your Plan</h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Start creating amazing music with AI. Choose the plan that fits your
-          creative needs.
+          Choose the perfect plan for your content creation needs. From individual creators to professional teams, we have solutions for YouTube, TikTok, and Instagram creators.
         </p>
       </div>
 
@@ -32,7 +31,7 @@ export const Pricing: React.FC = () => {
           <div className="text-center mb-8">
             <h2 className="text-xl md:text-2xl font-semibold mb-4">Get Started Today</h2>
             <p className="text-base text-muted-foreground">
-              Sign in to subscribe and start creating music with AI
+              Sign in to subscribe and start creating professional soundtracks for your videos
             </p>
           </div>
         </SignedOut>
@@ -60,8 +59,7 @@ export const Pricing: React.FC = () => {
               What are credits?
             </h4>
             <p className="text-base text-muted-foreground leading-relaxed">
-              Credits are used to generate AI music. Different generation tasks
-              may consume different amounts of credits.
+              Credits are used for AI music generation and video soundtrack creation. Different generation tasks may consume different amounts of credits.
             </p>
           </div>
           <div>

@@ -10,7 +10,7 @@ export type ScenarioValue =
 export interface Scenario {
   value: ScenarioValue;
   label: string;
-  icon: string;
+  iconName: string;
   description: string;
   templates: string[];
 }
@@ -27,7 +27,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "work-focus",
     label: "Work",
-    icon: "💼",
+    iconName: "Briefcase",
     description: "Focus and productivity",
     templates: [
       "Create focused background music for productive work sessions with minimal distractions",
@@ -38,7 +38,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "study",
     label: "Study",
-    icon: "📚",
+    iconName: "BookOpen",
     description: "Concentration and learning",
     templates: [
       "Create calming study music that helps with memory retention and concentration",
@@ -49,7 +49,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "meditation",
     label: "Relax",
-    icon: "🧘",
+    iconName: "Flower2",
     description: "Peace and mindfulness",
     templates: [
       "Create serene meditation music for deep relaxation and mindfulness practice",
@@ -60,7 +60,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "party",
     label: "Party",
-    icon: "🎉",
+    iconName: "PartyPopper",
     description: "Fun and celebration",
     templates: [
       "Create upbeat party music that gets everyone dancing and celebrating",
@@ -71,7 +71,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "workout",
     label: "Workout",
-    icon: "🏃",
+    iconName: "Dumbbell",
     description: "Energy and motivation",
     templates: [
       "Create high-energy workout music that boosts motivation and endurance",
@@ -82,7 +82,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "driving",
     label: "Driving",
-    icon: "🚗",
+    iconName: "Car",
     description: "Road trips and journeys",
     templates: [
       "Create smooth driving music perfect for long road trips and scenic routes",
@@ -93,7 +93,7 @@ export const SCENARIOS: Scenario[] = [
   {
     value: "romantic",
     label: "Romance",
-    icon: "💕",
+    iconName: "Heart",
     description: "Love and intimacy",
     templates: [
       "Create romantic music that sets the perfect mood for intimate moments",

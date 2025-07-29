@@ -10,8 +10,8 @@ export const useMockMusicGeneration = () => {
       setIsGenerating(true);
       
       // Show initial toast
-      const generatingToast = toast.loading("🎵 Starting music generation...", {
-        description: request.description || "Creating your custom music",
+      const generatingToast = toast.loading("🎵 Starting music and soundtrack generation...", {
+        description: request.description || "Creating your custom music or video soundtrack",
         duration: Infinity,
       });
 
@@ -56,7 +56,7 @@ export const useMockMusicGeneration = () => {
       // Show additional info about the mock
       setTimeout(() => {
         toast.info("🚧 Demo Mode", {
-          description: "This is a preview of the music generation flow. Real audio generation will be available once the backend is ready.",
+          description: "This is a preview of the music and soundtrack generation flow. Real audio generation will be available once the backend is ready.",
           duration: 8000,
         });
       }, 1000);

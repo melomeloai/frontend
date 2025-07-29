@@ -1,3 +1,4 @@
+import { Library as LibraryIcon, Plus } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -32,11 +33,15 @@ export const Library: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center space-y-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-          🎧 Your Music Library
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground flex items-center justify-center gap-3">
+          <LibraryIcon
+            className="w-8 h-8 md:w-10 md:h-10"
+            aria-label="Music library icon"
+          />
+          <span>Your Music Library</span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          All your AI-generated tracks in one place
+          All your AI-generated music and video soundtracks in one place
         </p>
       </div>
 
@@ -68,7 +73,7 @@ export const Library: React.FC = () => {
                   Play
                 </Button>
                 <Button
-                  variant="outline" 
+                  variant="outline"
                   size="sm"
                   className="flex-1 md:flex-none px-4 py-2 text-sm bg-white/[0.1] border-white/20 hover:bg-white/[0.15] text-white hover:text-white rounded-[8px]"
                 >
@@ -82,10 +87,11 @@ export const Library: React.FC = () => {
 
       <div className="text-center pt-4">
         <Link to={ROUTES.CREATE} className="block md:inline-block">
-          <Button
-            className="w-full md:w-auto px-8 py-4 text-lg md:text-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 text-white"
-          >
-            🎵 Create New Track
+          <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 hover:from-blue-500 hover:via-purple-600 hover:to-pink-600 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-purple-500/30 text-white">
+            <div className="flex items-center gap-2">
+              <Plus className="w-5 h-5" />
+              <span>Create New Track</span>
+            </div>
           </Button>
         </Link>
       </div>

@@ -1,10 +1,10 @@
-# 🎵 Music Generation Mock System
+# 🎵 Music and Soundtrack Generation Mock System
 
-This document explains the mock music generation system implemented while the backend API is in development.
+This document explains the mock music and video soundtrack generation system implemented while the backend API is in development.
 
 ## 📋 Overview
 
-Instead of making real API calls, the music generation flow now uses toast notifications to simulate the entire process, providing a realistic user experience without requiring a backend.
+Instead of making real API calls, the music and video soundtrack generation flow now uses toast notifications to simulate the entire process, providing a realistic user experience for both text-to-music generation and video AI soundtrack creation without requiring a backend.
 
 ## 🔄 Current Implementation
 
@@ -29,7 +29,7 @@ const {
 
 ### Toast Flow Simulation
 
-1. **Start**: "🎵 Starting music generation..."
+1. **Start**: "🎵 Starting music and soundtrack generation..."
 2. **Step 1**: "🎼 Composing melody..." (1.5s)
 3. **Step 2**: "🎹 Adding instruments..." (2s) 
 4. **Step 3**: "✨ Applying final touches..." (1.5s)
