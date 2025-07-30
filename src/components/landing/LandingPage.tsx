@@ -85,7 +85,7 @@ export const LandingPage: React.FC = () => {
             <Link to={ROUTES.LIBRARY} className="w-full md:w-auto">
               <Button
                 variant="outline"
-                className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-white/[0.1] border-white/20 hover:bg-white/[0.15] hover:border-white/30 rounded-[10px] transition-all duration-200 transform hover:scale-105 text-white hover:text-white"
+                className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-background/10 border-border/30 hover:bg-background/20 hover:border-border/50 rounded-[10px] transition-all duration-200 transform hover:scale-105 text-foreground hover:text-foreground"
               >
                 <div className="flex items-center gap-2">
                   <Headphones className="w-5 h-5" />

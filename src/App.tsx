@@ -1,5 +1,3 @@
-import {} from "@clerk/themes";
-
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import { AuthCallback } from "@/components/auth/AuthCallback";
@@ -12,6 +10,7 @@ import { Library } from "@/pages/Library";
 import { Pricing } from "@/pages/Pricing";
 import { ROUTES } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { shadcn } from "@clerk/themes";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -22,7 +21,10 @@ if (!clerkPubKey) {
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <ClerkProvider publishableKey={clerkPubKey}>
+      <ClerkProvider
+        appearance={{ theme: shadcn }}
+        publishableKey={clerkPubKey}
+      >
         <Router>
           <div className="min-h-screen">
             <Layout>
