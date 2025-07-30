@@ -97,7 +97,7 @@ export const Create: React.FC = () => {
           Create professional soundtracks for short videos or generate perfect
           music through text descriptions{" "}
           <Sparkles
-            className="inline w-5 h-5 text-primary"
+            className="inline w-5 h-5"
             aria-label="Sparkles decoration"
           />
         </p>
