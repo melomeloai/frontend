@@ -8,9 +8,8 @@ import { Create } from "@/pages/Create";
 import { Home } from "@/pages/Home";
 import { Library } from "@/pages/Library";
 import { Pricing } from "@/pages/Pricing";
-import { ROUTES } from "@/utils/constants";
+import { ROUTES, CLERK_APPEARANCE } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
-import { shadcn } from "@clerk/themes";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -22,7 +21,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <ClerkProvider
-        appearance={{ theme: shadcn }}
+        appearance={CLERK_APPEARANCE}
         publishableKey={clerkPubKey}
       >
         <Router>
