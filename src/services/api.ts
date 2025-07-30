@@ -61,11 +61,11 @@ export const createAuthenticatedAPI = (
   );
 
   return {
-    // User API - GET /api/users
-    userAPI: {
-      getUserInfo: async (): Promise<UserResponse> => {
-        const response = await authenticatedApi.get("/users");
-        return response.data;
+    // Auth API
+    authAPI: {
+      // POST /api/auth/login-callback - Login callback after Clerk authentication
+      loginCallback: async (): Promise<void> => {
+        await authenticatedApi.post("/auth/login-callback");
       },
     },
 

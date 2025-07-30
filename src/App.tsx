@@ -2,6 +2,7 @@ import {} from "@clerk/themes";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import { AuthCallback } from "@/components/auth/AuthCallback";
 import { Layout } from "@/components/layout/Layout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -33,6 +34,7 @@ function App() {
                 <Route path={ROUTES.ACCOUNT} element={<Pricing />} />
               </Routes>
             </Layout>
+            <AuthCallback />
             <Toaster />
           </div>
         </Router>
