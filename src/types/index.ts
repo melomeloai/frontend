@@ -121,3 +121,6 @@ export interface MusicTaskResponse {
   createdAt: string;
   completedAt?: string;
 }
+
+// Re-export task types
+export * from "./task";

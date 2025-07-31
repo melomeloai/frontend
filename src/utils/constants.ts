@@ -16,28 +16,28 @@ export const ROUTES = {
 // Landing Page Features
 export const LANDING_FEATURES = [
   {
-    iconName: "FileText",
-    title: "Text to Music",
+    iconName: "User",
+    title: "Independent Creators",
     description:
-      "Simply describe your needs and AI generates professional-quality music. Low-cost, high-efficiency creative experience",
+      "Perfect for YouTube creators, TikTok artists, and content makers who need professional soundtracks without breaking the bank",
   },
   {
-    iconName: "Video",
-    title: "Video AI Soundtrack",
+    iconName: "Bot",
+    title: "AI Video Directors",
     description:
-      "Specialized intelligent soundtrack services for YouTube, TikTok, and Instagram short video creators",
+      "Specialized tools for AI video production workflows with seamless integration and batch processing capabilities",
   },
   {
     iconName: "Users",
-    title: "For All Creators",
+    title: "Creative Studios",
     description:
-      "Serving individual creators and professional production teams, meeting content creation needs of all scales",
+      "Designed for small teams and production studios managing multiple projects with collaborative features and shared libraries",
   },
   {
-    iconName: "Zap",
-    title: "Ultra-Fast Generation",
+    iconName: "Building2",
+    title: "Enterprise Teams",
     description:
-      "Generate professional-grade audio in 30 seconds, support multiple export formats, instantly meet creative needs",
+      "Scalable solutions for marketing teams, agencies, and corporations with advanced API access and custom integrations",
   },
 ];
 

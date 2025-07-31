@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Music, Headphones, FileText, Video, Users, Zap } from "lucide-react";
+import { Music, Headphones, User, Bot, Users, Building2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { LANDING_FEATURES, ROUTES } from "@/utils/constants";
@@ -12,10 +12,10 @@ interface FeatureCardProps {
 }
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; 'aria-label'?: string }>> = {
-  FileText,
-  Video,
+  User,
+  Bot,
   Users,
-  Zap,
+  Building2,
 };
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
@@ -53,20 +53,20 @@ export const LandingPage: React.FC = () => {
           {/* Main Title */}
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Turn Your Ideas
+              AI Video Soundtrack
             </span>
             <br />
-            <span className="text-foreground">Into Music</span>
+            <span className="text-foreground">Solutions</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-muted-foreground font-medium">
-            Low-cost AI Music Generation · Professional Video Soundtrack Services
+            Professional AI-powered soundtracks for video creators and production teams
           </p>
 
           {/* Description */}
           <p className="text-base text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Professional soundtrack services for YouTube, TikTok, and Instagram creators. Generate music from text descriptions and create perfect soundtracks for your short videos with AI
+            From independent creators to enterprise teams, our AI delivers custom soundtracks that perfectly match your video content. Trusted by YouTube creators, AI video directors, and production studios worldwide.
           </p>
 
           {/* CTA Buttons */}
@@ -77,7 +77,7 @@ export const LandingPage: React.FC = () => {
               >
                 <div className="flex items-center gap-2">
                   <Music className="w-5 h-5" />
-                  <span>Start Creating</span>
+                  <span>Try Free Demo</span>
                 </div>
               </Button>
             </Link>
@@ -89,7 +89,7 @@ export const LandingPage: React.FC = () => {
               >
                 <div className="flex items-center gap-2">
                   <Headphones className="w-5 h-5" />
-                  <span>Explore Library</span>
+                  <span>Sample Gallery</span>
                 </div>
               </Button>
             </Link>
