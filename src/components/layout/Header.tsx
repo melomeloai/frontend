@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center flex-shrink-0">
             <Link
               to={ROUTES.HOME}
-              className="text-lg md:text-xl font-bold text-foreground bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent flex items-center"
+              className="text-lg md:text-xl font-bold text-foreground flex items-center"
             >
               MeloReels.AI
             </Link>

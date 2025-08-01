@@ -21,7 +21,7 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ item, onPlay }) => {
   return (
     <div className="bg-card backdrop-blur-sm rounded-xl overflow-hidden hover:bg-card/90 hover:-translate-y-1 transition-all duration-300 group border border-border/50">
       {/* Video Thumbnail */}
-      <div className="relative aspect-video bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden">
+      <div className="relative aspect-video bg-gray-800 overflow-hidden">
         <img
           src={item.thumbnail}
           alt={item.title}
@@ -151,7 +151,7 @@ export const SampleGallery: React.FC = () => {
   };
 
   return (
-    <div className="py-16 bg-gradient-to-b from-transparent to-muted/20">
+    <div className="py-16 bg-muted/10">
       <div className="max-w-6xl">
         {/* Section Header */}
         <div className="mb-12">
@@ -176,7 +176,7 @@ export const SampleGallery: React.FC = () => {
           <p className="text-muted-foreground mb-4">
             Ready to create your own custom soundtrack?
           </p>
-          <Button className="px-8 py-3 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 hover:from-blue-500 hover:via-purple-600 hover:to-pink-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105">
+          <Button className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all duration-200 transform hover:scale-105">
             Get Started Free
           </Button>
         </div>

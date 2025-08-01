@@ -70,13 +70,11 @@ export const VideoUpload: React.FC<VideoUploadProps> = ({
             onChange={onVideoDescriptionChange}
             isGenerating={isGenerating}
           />
-          {uploadedVideo && (
-            <VideoFileInfo
-              uploadedVideo={uploadedVideo}
-              videoDuration={videoDuration}
-              videoMetadata={videoMetadata}
-            />
-          )}
+          <VideoFileInfo
+            uploadedVideo={uploadedVideo}
+            videoDuration={videoDuration}
+            videoMetadata={videoMetadata}
+          />
           <div className="flex-1" />
           <div className="flex justify-center md:justify-end">
             <GenerateButton
