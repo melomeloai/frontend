@@ -87,7 +87,7 @@ export const Library: React.FC = () => {
 
       <div className="text-center pt-4">
         <Link to={ROUTES.CREATE} className="block md:inline-block">
-          <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 hover:from-blue-500 hover:via-purple-600 hover:to-pink-600 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-purple-500/30 text-white">
+          <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-primary hover:bg-primary/90 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-primary-foreground">
             <div className="flex items-center gap-2">
               <Plus className="w-5 h-5" />
               <span>Create New Track</span>

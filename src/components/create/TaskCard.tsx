@@ -166,7 +166,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             </div>
             <div className="w-full bg-muted/20 rounded-full h-2">
               <div 
-                className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-500"
+                className="bg-primary h-2 rounded-full transition-all duration-500"
                 style={{ width: `${task.progress}%` }}
               />
             </div>
