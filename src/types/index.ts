@@ -82,17 +82,83 @@ export interface CustomerPortalResponse {
   portalUrl: string;
 }
 
-// Music Generation Types - Simplified for mock system
-export interface MusicGenerationRequest {
-  description: string;
-  [key: string]: any; // Allow any additional properties for flexibility
+// File Upload Types
+export interface FileUploadRequest {
+  fileName: string;
+  contentType: string;
+  fileSize: number;
+  fileType: "VIDEO" | "AUDIO";
 }
 
+export interface FileUploadResponse {
+  requestStatus: RequestStatus;
+  uploadUrl?: string;
+  fileKey?: string;
+}
+
+// Request Status Type
+export interface RequestStatus {
+  requestId?: string;
+  error?: string;
+  errorMessage?: string;
+}
+
+// Music Generation Types - Updated to match API spec
+export type TaskType = "TEXT_TO_MUSIC" | "MUSIC_EDITING" | "VIDEO_SOUNDTRACK";
+export type AudioSourceType = "URL" | "FILE_KEY";
+export type VideoSourceType = "URL" | "FILE_KEY";
+export type TaskStatus = "PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED";
+export type TriggerSource = "UI" | "API";
+
+export interface MusicGenerationRequest {
+  taskType: TaskType;
+  prompt?: string;
+  duration?: number;
+  audioSource?: string;
+  audioSourceType?: AudioSourceType;
+  videoSource?: string;
+  videoSourceType?: VideoSourceType;
+  parameters?: string;
+}
+
+export interface TaskResponse {
+  requestStatus: RequestStatus;
+  taskId?: string;
+  taskType?: TaskType;
+  status?: TaskStatus;
+  triggerSource?: TriggerSource;
+  prompt?: string;
+  duration?: number;
+  audioSource?: string;
+  audioSourceType?: AudioSourceType;
+  videoSource?: string;
+  videoSourceType?: VideoSourceType;
+  resultAudioUrl?: string;
+  errorMessage?: string;
+  progress?: number;
+  creditsConsumed?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  completedAt?: string;
+}
+
+export interface TaskListResponse {
+  requestStatus: RequestStatus;
+  tasks?: TaskResponse[];
+  pagination?: PaginationInfo;
+}
+
+export interface PaginationInfo {
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+}
+
+// Legacy types for backward compatibility
 export interface MusicGenerationResponse {
   taskId: string;
 }
-
-export type TaskStatus = "pending" | "processing" | "completed" | "failed";
 
 export interface MusicTask {
   taskId: string;

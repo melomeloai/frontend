@@ -3,34 +3,39 @@ import { Upload, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
 import { validateVideoFile, getMaxFileSizeText } from "@/utils/fileValidation";
+import type { VideoUploadZoneProps } from "@/types/video";
 
-interface VideoUploadDropzoneProps {
-  onVideoUpload: (file: File) => void;
-}
-
-export const VideoUploadDropzone: React.FC<VideoUploadDropzoneProps> = ({
+export const VideoUploadZone: React.FC<VideoUploadZoneProps> = ({
   onVideoUpload,
+  isDisabled = false,
 }) => {
+  const handleFileUpload = (file: File) => {
+    if (isDisabled) return;
+    
+    const validation = validateVideoFile(file);
+    
+    if (validation.isValid) {
+      onVideoUpload(file);
+    } else {
+      toast.error(validation.error, {
+        icon: <AlertCircle className="w-5 h-5 text-red-500" />,
+        style: {
+          border: '1px solid #ef4444',
+          backgroundColor: '#fef2f2',
+          color: '#dc2626',
+        },
+        duration: 5000,
+      });
+    }
+  };
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    if (isDisabled) return;
+    
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      const file = files[0];
-      const validation = validateVideoFile(file);
-      
-      if (validation.isValid) {
-        onVideoUpload(file);
-      } else {
-        toast.error(validation.error, {
-          icon: <AlertCircle className="w-5 h-5 text-red-500" />,
-          style: {
-            border: '1px solid #ef4444',
-            backgroundColor: '#fef2f2',
-            color: '#dc2626',
-          },
-          duration: 5000,
-        });
-      }
+      handleFileUpload(files[0]);
     }
   };
 
@@ -41,21 +46,7 @@ export const VideoUploadDropzone: React.FC<VideoUploadDropzoneProps> = ({
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const validation = validateVideoFile(file);
-      
-      if (validation.isValid) {
-        onVideoUpload(file);
-      } else {
-        toast.error(validation.error, {
-          icon: <AlertCircle className="w-5 h-5 text-red-500" />,
-          style: {
-            border: '1px solid #ef4444',
-            backgroundColor: '#fef2f2',
-            color: '#dc2626',
-          },
-          duration: 5000,
-        });
-      }
+      handleFileUpload(file);
     }
   };
 
@@ -69,10 +60,12 @@ export const VideoUploadDropzone: React.FC<VideoUploadDropzoneProps> = ({
       
       <div>
         <div
-          className="border-2 border-dashed border-border/50 rounded-2xl p-8 md:p-12 text-center bg-background/50 hover:bg-background/80 transition-all duration-300 cursor-pointer group min-h-[280px] md:min-h-[360px] flex items-center justify-center"
+          className={`border-2 border-dashed border-border/50 rounded-2xl p-8 md:p-12 text-center bg-background/50 hover:bg-background/80 transition-all duration-300 group min-h-[280px] md:min-h-[360px] flex items-center justify-center ${
+            isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+          }`}
           onDrop={handleDrop}
           onDragOver={handleDragOver}
-          onClick={() => document.getElementById("video-upload")?.click()}
+          onClick={() => !isDisabled && document.getElementById("video-upload")?.click()}
         >
           <div className="space-y-4">
           <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -95,6 +88,7 @@ export const VideoUploadDropzone: React.FC<VideoUploadDropzoneProps> = ({
             accept="video/*"
             className="hidden"
             onChange={handleFileSelect}
+            disabled={isDisabled}
           />
           </div>
         </div>

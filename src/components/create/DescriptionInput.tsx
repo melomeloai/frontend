@@ -2,13 +2,13 @@ import React from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 
-interface VideoDescriptionInputProps {
+interface DescriptionInputProps {
   value: string;
   onChange: (value: string) => void;
   isGenerating?: boolean;
 }
 
-export const VideoDescriptionInput: React.FC<VideoDescriptionInputProps> = ({
+export const DescriptionInput: React.FC<DescriptionInputProps> = ({
   value,
   onChange,
   isGenerating = false,

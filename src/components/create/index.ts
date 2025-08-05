@@ -1,10 +1,10 @@
 export { VideoUpload } from "./VideoUpload";
-export { VideoUploadDropzone } from "./VideoUploadDropzone";
-export { VideoPlayer } from "./VideoPlayer";
+export { VideoUploadContainer } from "./VideoUploadContainer";
+export { VideoUploadZone } from "./VideoUploadZone";
+export { VideoDisplay } from "./VideoDisplay";
 export { VideoFileInfo } from "./VideoFileInfo";
-export { VideoDescriptionInput } from "./VideoDescriptionInput";
+export { DescriptionInput } from "./DescriptionInput";
+export { ActionButtons } from "./ActionButtons";
 export { GenerateButton } from "./GenerateButton";
 export { TaskCenter } from "./TaskCenter";
 export { TaskCard } from "./TaskCard";
-// Legacy component - kept for potential future use
-export { VideoPreview } from "./VideoPreview";
