@@ -86,7 +86,8 @@ export const Create: React.FC = () => {
 
     try {
       const request: MusicGenerationRequest = {
-        description: `Video soundtrack for: ${videoDescription.trim()}`,
+        taskType: "VIDEO_SOUNDTRACK",
+        prompt: `Video soundtrack for: ${videoDescription.trim()}`,
       };
       await generateMusic(request);
     } catch (err) {

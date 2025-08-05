@@ -11,7 +11,7 @@ export const useMockMusicGeneration = () => {
       
       // Show initial toast
       const generatingToast = toast.loading("🎵 Starting music and soundtrack generation...", {
-        description: request.description || "Creating your custom music or video soundtrack",
+        description: request.prompt || "Creating your custom music or video soundtrack",
         duration: Infinity,
       });
 

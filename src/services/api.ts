@@ -4,10 +4,14 @@ import type {
   CheckoutSessionResponse,
   CreditInfoResponse,
   CustomerPortalResponse,
+  FileUploadRequest,
+  FileUploadResponse,
   MusicGenerationRequest,
   MusicGenerationResponse,
   MusicTaskResponse,
   SubscriptionInfoResponse,
+  TaskResponse,
+  TaskListResponse,
   UpgradeRequest,
   UserResponse,
 } from "@/types";
@@ -103,7 +107,62 @@ export const createAuthenticatedAPI = (
       },
     },
 
-    // Music Generation API
+    // File Upload API
+    fileAPI: {
+      // POST /api/files/upload-url
+      getUploadUrl: async (
+        request: FileUploadRequest
+      ): Promise<FileUploadResponse> => {
+        const response = await authenticatedApi.post(
+          "/files/upload-url",
+          request
+        );
+        return response.data;
+      },
+
+      // Upload file to S3 (no auth needed, uses presigned URL)
+      uploadToS3: async (uploadUrl: string, file: File): Promise<void> => {
+        await axios.put(uploadUrl, file, {
+          headers: {
+            "Content-Type": file.type,
+            "Content-Length": file.size.toString(),
+          },
+        });
+      },
+    },
+
+    // Task API (replaces music API to match new spec)
+    taskAPI: {
+      // POST /api/tasks
+      submitTask: async (
+        request: MusicGenerationRequest
+      ): Promise<TaskResponse> => {
+        const response = await authenticatedApi.post("/tasks", request);
+        return response.data;
+      },
+
+      // GET /api/tasks
+      getTasks: async (page = 1, pageSize = 10): Promise<TaskListResponse> => {
+        const response = await authenticatedApi.get("/tasks", {
+          params: { page, pageSize },
+        });
+        return response.data;
+      },
+
+      // GET /api/tasks/:taskId
+      getTask: async (taskId: string): Promise<TaskResponse> => {
+        const response = await authenticatedApi.get(`/tasks/${taskId}`);
+        return response.data;
+      },
+
+      // POST /api/tasks/:taskId/retry
+      retryTask: async (taskId: string): Promise<TaskResponse> => {
+        const response = await authenticatedApi.post(`/tasks/${taskId}/retry`);
+        return response.data;
+      },
+    },
+
+    // Legacy Music Generation API (deprecated)
     musicAPI: {
       // POST /api/music/generate
       generateMusic: async (
