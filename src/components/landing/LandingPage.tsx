@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/utils/constants";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react";
 
 import { SampleGallery } from "./SampleGallery";
 import { ScrollIndicator } from "./ScrollIndicator";
@@ -29,14 +30,27 @@ export const LandingPage: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col md:flex-row gap-4 pt-4">
-            <Link to={ROUTES.CREATE}>
-              <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-primary hover:bg-primary/90 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl focus:ring-2 focus:ring-primary/50 text-primary-foreground">
-                <div className="flex items-center gap-2">
-                  <Music className="w-5 h-5" />
-                  <span>Try Free Demo</span>
-                </div>
-              </Button>
-            </Link>
+            <SignedOut>
+              <SignInButton mode="modal" forceRedirectUrl={ROUTES.WORKSPACE_CREATE}>
+                <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-primary hover:bg-primary/90 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl focus:ring-2 focus:ring-primary/50 text-primary-foreground">
+                  <div className="flex items-center gap-2">
+                    <Music className="w-5 h-5" />
+                    <span>Try Free Demo</span>
+                  </div>
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            
+            <SignedIn>
+              <Link to={ROUTES.WORKSPACE_CREATE}>
+                <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-primary hover:bg-primary/90 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl focus:ring-2 focus:ring-primary/50 text-primary-foreground">
+                  <div className="flex items-center gap-2">
+                    <Music className="w-5 h-5" />
+                    <span>Go to Workspace</span>
+                  </div>
+                </Button>
+              </Link>
+            </SignedIn>
 
             <Link to={ROUTES.PRICING}>
               <Button

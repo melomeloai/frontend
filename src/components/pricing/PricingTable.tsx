@@ -54,7 +54,7 @@ export const PricingTable: React.FC = () => {
 
   const handleSignInRequired = () => {
     openSignIn({
-      redirectUrl: "/pricing",
+      redirectUrl: "/workspace/create",
     });
   };
 
