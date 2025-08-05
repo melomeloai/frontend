@@ -1,13 +1,21 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 
 import { AuthCallback } from "@/components/auth/AuthCallback";
-import { Layout } from "@/components/layout/Layout";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { PublicLayout } from "@/layouts/PublicLayout";
+import { AuthenticatedLayout } from "@/layouts/AuthenticatedLayout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { Create } from "@/pages/Create";
-import { Home } from "@/pages/Home";
-import { Library } from "@/pages/Library";
-import { Pricing } from "@/pages/Pricing";
+
+// Public pages
+import { Home } from "@/pages/public/Home";
+import { Pricing } from "@/pages/public/Pricing";
+
+// Workspace pages
+import { Create } from "@/pages/workspace/Create";
+import { Library } from "@/pages/workspace/Library";
+import { Plan } from "@/pages/workspace/Plan";
+
 import { ROUTES, CLERK_APPEARANCE } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
 
@@ -26,15 +34,50 @@ function App() {
       >
         <Router>
           <div className="min-h-screen">
-            <Layout>
-              <Routes>
-                <Route path={ROUTES.HOME} element={<Home />} />
-                <Route path={ROUTES.CREATE} element={<Create />} />
-                <Route path={ROUTES.LIBRARY} element={<Library />} />
-                <Route path={ROUTES.PRICING} element={<Pricing />} />
-                <Route path={ROUTES.ACCOUNT} element={<Pricing />} />
-              </Routes>
-            </Layout>
+            <Routes>
+              {/* Public routes */}
+              <Route path={ROUTES.HOME} element={
+                <PublicLayout>
+                  <Home />
+                </PublicLayout>
+              } />
+              <Route path={ROUTES.PRICING} element={
+                <PublicLayout>
+                  <Pricing />
+                </PublicLayout>
+              } />
+
+              {/* Workspace routes (protected) */}
+              <Route path={ROUTES.WORKSPACE} element={
+                <Navigate to={ROUTES.WORKSPACE_CREATE} replace />
+              } />
+              <Route path={ROUTES.WORKSPACE_CREATE} element={
+                <ProtectedRoute>
+                  <AuthenticatedLayout>
+                    <Create />
+                  </AuthenticatedLayout>
+                </ProtectedRoute>
+              } />
+              <Route path={ROUTES.WORKSPACE_LIBRARY} element={
+                <ProtectedRoute>
+                  <AuthenticatedLayout>
+                    <Library />
+                  </AuthenticatedLayout>
+                </ProtectedRoute>
+              } />
+              <Route path={ROUTES.WORKSPACE_PLAN} element={
+                <ProtectedRoute>
+                  <AuthenticatedLayout>
+                    <Plan />
+                  </AuthenticatedLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Legacy routes (backwards compatibility) */}
+              <Route path={ROUTES.CREATE} element={<Navigate to={ROUTES.WORKSPACE_CREATE} replace />} />
+              <Route path={ROUTES.LIBRARY} element={<Navigate to={ROUTES.WORKSPACE_LIBRARY} replace />} />
+              <Route path={ROUTES.ACCOUNT} element={<Navigate to={ROUTES.WORKSPACE_PLAN} replace />} />
+            </Routes>
             <AuthCallback />
             <Toaster />
           </div>
