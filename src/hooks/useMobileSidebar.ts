@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useSidebar = () => {
+export const useMobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -14,6 +14,13 @@ export const useSidebar = () => {
 
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Always keep mobile sidebar closed by default
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      setIsOpen(false);
+    }
+  }, [isMobile]);
 
   const toggle = () => setIsOpen(!isOpen);
   const close = () => setIsOpen(false);
