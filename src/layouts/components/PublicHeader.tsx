@@ -27,9 +27,12 @@ export const PublicHeader: React.FC = () => {
             >
               Pricing
             </Link>
-            
+
             <SignedOut>
-              <SignInButton mode="modal">
+              <SignInButton
+                mode="modal"
+                forceRedirectUrl={ROUTES.WORKSPACE_CREATE}
+              >
                 <button className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
                   Sign In
                 </button>

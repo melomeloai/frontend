@@ -1,41 +1,61 @@
 import React from "react";
 
-import { Sidebar } from "./components/Sidebar";
-import { WorkspaceHeader } from "./components/WorkspaceHeader";
-import { useSidebar } from "@/hooks/useSidebar";
+import { useMobileSidebar } from "@/hooks/useMobileSidebar";
+import { useDesktopSidebar } from "@/hooks/useDesktopSidebar";
 import { cn } from "@/lib/utils";
+
+import { MobileSidebar } from "./components/MobileSidebar";
+import { DesktopSidebar } from "./components/DesktopSidebar";
+import { WorkspaceHeader } from "./components/WorkspaceHeader";
 
 interface AuthenticatedLayoutProps {
   children: React.ReactNode;
 }
 
-export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({ children }) => {
-  const { isOpen, isMobile, toggle, close } = useSidebar();
+export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
+  children,
+}) => {
+  const mobileHooks = useMobileSidebar();
+  const desktopHooks = useDesktopSidebar();
 
-  // On desktop, sidebar should be open by default
-  React.useEffect(() => {
-    if (!isMobile && !isOpen) {
-      toggle();
-    }
-  }, [isMobile, isOpen, toggle]);
+  const getSidebarWidth = () => {
+    if (desktopHooks.isMobile || !desktopHooks.isOpen) return 0;
+    return desktopHooks.isCollapsed ? 80 : 320; // 80px for collapsed, 320px for expanded
+  };
 
   return (
     <div className="min-h-screen bg-background">
-      <Sidebar isOpen={isOpen} isMobile={isMobile} onClose={close} />
-      
+      {/* Mobile Sidebar */}
+      <MobileSidebar
+        isOpen={mobileHooks.isOpen}
+        onClose={mobileHooks.close}
+      />
+
+      {/* Desktop Sidebar */}
+      <DesktopSidebar
+        isOpen={desktopHooks.isOpen}
+        isCollapsed={desktopHooks.isCollapsed}
+        onToggleCollapse={desktopHooks.toggleCollapse}
+      />
+
       <div
         className={cn(
           "transition-all duration-300 ease-in-out",
-          // On desktop, add left margin when sidebar is open
-          !isMobile && isOpen ? "ml-80" : "",
-          // On mobile, sidebar overlays so no margin needed
-          isMobile ? "" : ""
+          // On desktop, add left margin based on sidebar state
+          !desktopHooks.isMobile && desktopHooks.isOpen ? `ml-[${getSidebarWidth()}px]` : "",
         )}
+        style={{
+          marginLeft: !desktopHooks.isMobile && desktopHooks.isOpen ? `${getSidebarWidth()}px` : 0,
+        }}
       >
-        <WorkspaceHeader onMenuClick={toggle} isMobile={isMobile} />
-        <main className="p-6 md:p-12">
-          {children}
-        </main>
+        {/* Mobile header with user menu */}
+        {desktopHooks.isMobile && (
+          <WorkspaceHeader 
+            onMenuClick={mobileHooks.toggle} 
+            isMobile={desktopHooks.isMobile} 
+          />
+        )}
+        <main className="p-6 md:p-12">{children}</main>
       </div>
     </div>
   );

@@ -11,16 +11,16 @@ export const ROUTES = {
   PRICING: "/pricing",
   LOGIN: "/login",
   
-  // Legacy routes (for backwards compatibility)
-  CREATE: "/create",
-  ACCOUNT: "/account",
-  LIBRARY: "/library",
-  
   // Workspace routes
   WORKSPACE: "/workspace",
   WORKSPACE_CREATE: "/workspace/create",
   WORKSPACE_LIBRARY: "/workspace/library",
   WORKSPACE_PLAN: "/workspace/plan",
+  
+  // Legacy routes (for backwards compatibility)
+  CREATE: "/create",
+  ACCOUNT: "/account",
+  LIBRARY: "/library",
 } as const;
 
 // File Upload Limits
