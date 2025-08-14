@@ -103,50 +103,6 @@ export interface RequestStatus {
   errorMessage?: string;
 }
 
-// Music Generation Types - Updated to match API spec
-export type TaskType = "TEXT_TO_MUSIC" | "MUSIC_EDITING" | "VIDEO_SOUNDTRACK";
-export type AudioSourceType = "URL" | "FILE_KEY";
-export type VideoSourceType = "URL" | "FILE_KEY";
-export type TaskStatus = "PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED";
-export type TriggerSource = "UI" | "API";
-
-export interface MusicGenerationRequest {
-  taskType: TaskType;
-  prompt?: string;
-  duration?: number;
-  audioSource?: string;
-  audioSourceType?: AudioSourceType;
-  videoSource?: string;
-  videoSourceType?: VideoSourceType;
-  parameters?: string;
-}
-
-export interface TaskResponse {
-  requestStatus: RequestStatus;
-  taskId?: string;
-  taskType?: TaskType;
-  status?: TaskStatus;
-  triggerSource?: TriggerSource;
-  prompt?: string;
-  duration?: number;
-  audioSource?: string;
-  audioSourceType?: AudioSourceType;
-  videoSource?: string;
-  videoSourceType?: VideoSourceType;
-  resultAudioUrl?: string;
-  errorMessage?: string;
-  progress?: number;
-  creditsConsumed?: number;
-  createdAt?: string;
-  updatedAt?: string;
-  completedAt?: string;
-}
-
-export interface TaskListResponse {
-  requestStatus: RequestStatus;
-  tasks?: TaskResponse[];
-  pagination?: PaginationInfo;
-}
 
 export interface PaginationInfo {
   page: number;
@@ -155,38 +111,63 @@ export interface PaginationInfo {
   totalPages: number;
 }
 
-// Legacy types for backward compatibility
-export interface MusicGenerationResponse {
-  taskId: string;
+
+// Session Management Types
+export type MessageSender = "USER" | "ASSISTANT";
+export type SongStatus = "GENERATING" | "COMPLETED" | "FAILED" | "EDITING";
+
+export interface MessageDto {
+  messageId: string;
+  parentMessageId?: string;
+  content: string;
+  sender: MessageSender;
+  timestamp: string;
+  songId?: string;
+  metadata?: Record<string, any>;
 }
 
-export interface MusicTask {
-  taskId: string;
-  status: TaskStatus;
-  progress?: number;
-  result?: {
-    audioUrl: string;
-    title: string;
-    duration: number;
-  };
-  error?: string;
+export interface SongDto {
+  songId: string;
+  title: string;
+  tags: string[];
+  fileKey: string;
+  duration: number;
+  downloadUrl: string;
+  status: SongStatus;
+  generationParams?: Record<string, any>;
   createdAt: string;
   completedAt?: string;
 }
 
-export interface MusicTaskResponse {
-  taskId: string;
-  status: TaskStatus;
-  progress?: number;
-  result?: {
-    audioUrl: string;
-    title: string;
-    duration: number;
-  };
-  error?: string;
+export interface SessionSummaryDto {
+  sessionId: string;
   createdAt: string;
-  completedAt?: string;
+  updatedAt: string;
 }
 
-// Re-export task types
-export * from "./task";
+export interface SessionResponse {
+  requestStatus: RequestStatus;
+  sessionId?: string;
+  userId?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  messages?: MessageDto[];
+  songs?: SongDto[];
+}
+
+export interface SessionListResponse {
+  requestStatus: RequestStatus;
+  sessions?: SessionSummaryDto[];
+  pagination?: PaginationInfo;
+}
+
+export interface SendMessageRequest {
+  parentMessageId?: string;
+  content: string;
+}
+
+export interface SessionUpdateResponse {
+  messageUpdates: MessageDto[];
+  songUpdates: SongDto[];
+}
+

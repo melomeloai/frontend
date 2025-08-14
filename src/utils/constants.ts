@@ -10,17 +10,13 @@ export const ROUTES = {
   HOME: "/",
   PRICING: "/pricing",
   LOGIN: "/login",
-  
+
   // Workspace routes
   WORKSPACE: "/workspace",
   WORKSPACE_CREATE: "/workspace/create",
   WORKSPACE_LIBRARY: "/workspace/library",
   WORKSPACE_PLAN: "/workspace/plan",
-  
-  // Legacy routes (for backwards compatibility)
-  CREATE: "/create",
-  ACCOUNT: "/account",
-  LIBRARY: "/library",
+  WORKSPACE_SESSION: "/workspace/sessions/:sessionId",
 } as const;
 
 // File Upload Limits

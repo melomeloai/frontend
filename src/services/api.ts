@@ -6,16 +6,36 @@ import type {
   CustomerPortalResponse,
   FileUploadRequest,
   FileUploadResponse,
-  MusicGenerationRequest,
-  MusicGenerationResponse,
-  MusicTaskResponse,
+  SendMessageRequest,
+  SessionListResponse,
+  SessionResponse,
+  SessionUpdateResponse,
   SubscriptionInfoResponse,
-  TaskResponse,
-  TaskListResponse,
   UpgradeRequest,
   UserResponse,
 } from "@/types";
 import { API_BASE_URL } from "@/utils/constants";
+
+// Helper function to convert snake_case to camelCase recursively
+function snakeToCamelCase(obj: any): any {
+  if (obj === null || typeof obj !== "object") {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(snakeToCamelCase);
+  }
+
+  const camelCaseObj: any = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const camelCaseKey = key.replace(/_([a-z])/g, (_, letter) =>
+      letter.toUpperCase()
+    );
+    camelCaseObj[camelCaseKey] = snakeToCamelCase(value);
+  }
+
+  return camelCaseObj;
+}
 
 // Create axios instance
 const api = axios.create({
@@ -23,9 +43,15 @@ const api = axios.create({
   timeout: 10000,
 });
 
-// Response interceptor for error handling
+// Response interceptor for error handling and key transformation
 api.interceptors.response.use(
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => {
+    // Transform snake_case keys to camelCase
+    if (response.data) {
+      response.data = snakeToCamelCase(response.data);
+    }
+    return response;
+  },
   (error) => {
     console.error("API Error:", error);
     return Promise.reject(error);
@@ -57,7 +83,13 @@ export const createAuthenticatedAPI = (
   );
 
   authenticatedApi.interceptors.response.use(
-    (response: AxiosResponse) => response,
+    (response: AxiosResponse) => {
+      // Transform snake_case keys to camelCase
+      if (response.data) {
+        response.data = snakeToCamelCase(response.data);
+      }
+      return response;
+    },
     (error) => {
       console.error("API Error:", error);
       return Promise.reject(error);
@@ -131,104 +163,42 @@ export const createAuthenticatedAPI = (
       },
     },
 
-    // Task API (replaces music API to match new spec)
-    taskAPI: {
-      // POST /api/tasks
-      submitTask: async (
-        request: MusicGenerationRequest
-      ): Promise<TaskResponse> => {
-        const response = await authenticatedApi.post("/tasks", request);
-        return response.data;
-      },
-
-      // GET /api/tasks
-      getTasks: async (page = 1, pageSize = 10): Promise<TaskListResponse> => {
-        const response = await authenticatedApi.get("/tasks", {
+    // Session API
+    sessionAPI: {
+      // GET /api/sessions - List user sessions with pagination
+      listUserSessions: async (
+        page = 0,
+        pageSize = 10
+      ): Promise<SessionListResponse> => {
+        const response = await authenticatedApi.get("/sessions", {
           params: { page, pageSize },
         });
         return response.data;
       },
 
-      // GET /api/tasks/:taskId
-      getTask: async (taskId: string): Promise<TaskResponse> => {
-        const response = await authenticatedApi.get(`/tasks/${taskId}`);
+      // POST /api/sessions - Create new session
+      createSession: async (): Promise<SessionResponse> => {
+        const response = await authenticatedApi.post("/sessions");
         return response.data;
       },
 
-      // POST /api/tasks/:taskId/retry
-      retryTask: async (taskId: string): Promise<TaskResponse> => {
-        const response = await authenticatedApi.post(`/tasks/${taskId}/retry`);
+      // GET /api/sessions/:sessionId - Get session details with all messages
+      getSession: async (sessionId: string): Promise<SessionResponse> => {
+        const response = await authenticatedApi.get(`/sessions/${sessionId}`);
         return response.data;
       },
-    },
 
-    // Legacy Music Generation API (deprecated)
-    musicAPI: {
-      // POST /api/music/generate
-      generateMusic: async (
-        request: MusicGenerationRequest
-      ): Promise<MusicGenerationResponse> => {
+      // POST /api/sessions/:sessionId - Send message to AI chatbot in session
+      sendMessage: async (
+        sessionId: string,
+        request: SendMessageRequest
+      ): Promise<SessionUpdateResponse> => {
         const response = await authenticatedApi.post(
-          "/music/generate",
+          `/sessions/${sessionId}`,
           request
         );
-        return response.data;
-      },
-
-      // GET /api/music/tasks/:taskId
-      getTask: async (taskId: string): Promise<MusicTaskResponse> => {
-        const response = await authenticatedApi.get(`/music/tasks/${taskId}`);
         return response.data;
       },
     },
   };
 };
-
-// For backward compatibility, export individual APIs (will be deprecated)
-export const userAPI = {
-  getUserInfo: async (): Promise<UserResponse> => {
-    const response = await api.get("/users");
-    return response.data;
-  },
-};
-
-export const creditsAPI = {
-  getCreditInfo: async (): Promise<CreditInfoResponse> => {
-    const response = await api.get("/credits");
-    return response.data;
-  },
-};
-
-export const subscriptionAPI = {
-  getSubscriptionInfo: async (): Promise<SubscriptionInfoResponse> => {
-    const response = await api.get("/subscriptions");
-    return response.data;
-  },
-
-  createCheckoutSession: async (
-    request: UpgradeRequest
-  ): Promise<CheckoutSessionResponse> => {
-    const response = await api.post("/subscriptions/checkout", request);
-    return response.data;
-  },
-
-  getCustomerPortal: async (): Promise<CustomerPortalResponse> => {
-    const response = await api.post("/subscriptions/portal");
-    return response.data;
-  },
-};
-
-// Music API - Commented out until backend is ready
-// export const musicAPI = {
-//   generateMusic: async (
-//     request: MusicGenerationRequest
-//   ): Promise<MusicGenerationResponse> => {
-//     const response = await api.post("/music/generate", request);
-//     return response.data;
-//   },
-
-//   getTask: async (taskId: string): Promise<MusicTaskResponse> => {
-//     const response = await api.get(`/music/tasks/${taskId}`);
-//     return response.data;
-//   },
-// };
