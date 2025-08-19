@@ -86,7 +86,7 @@ export const Library: React.FC = () => {
       </div>
 
       <div className="text-center pt-4">
-        <Link to={ROUTES.CREATE} className="block md:inline-block">
+        <Link to={ROUTES.WORKSPACE_CREATE} className="block md:inline-block">
           <Button className="w-full md:w-auto px-8 py-4 md:py-6 text-lg md:text-xl font-semibold bg-primary hover:bg-primary/90 rounded-[10px] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-primary-foreground">
             <div className="flex items-center gap-2">
               <Plus className="w-5 h-5" />

@@ -12,7 +12,6 @@ import type {
   SessionUpdateResponse,
   SubscriptionInfoResponse,
   UpgradeRequest,
-  UserResponse,
 } from "@/types";
 import { API_BASE_URL } from "@/utils/constants";
 

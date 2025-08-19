@@ -1,28 +1,29 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import { useAuth } from "@clerk/clerk-react";
+
 import { createAuthenticatedAPI } from "@/services/api";
-import type { FileUploadRequest, MusicGenerationRequest, TaskResponse } from "@/types";
+import type { FileUploadRequest } from "@/types";
+import { useAuth } from "@clerk/clerk-react";
 
 export const useVideoUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
   const { getToken } = useAuth();
 
   const uploadVideoAndSubmitTask = useCallback(
-    async (file: File, description: string): Promise<TaskResponse | null> => {
+    async (file: File, description: string): Promise<void> => {
       if (!file || !description.trim()) {
         toast.error("Please provide both video file and description");
-        return null;
+        return;
       }
 
       setIsUploading(true);
-      
+
       try {
         const api = createAuthenticatedAPI(getToken);
 
         // 1. 获取上传 URL
         toast.info("📤 Getting upload URL...", { duration: 3000 });
-        
+
         const uploadRequest: FileUploadRequest = {
           fileName: file.name,
           contentType: file.type,
@@ -34,7 +35,8 @@ export const useVideoUpload = () => {
 
         if (uploadResponse.requestStatus.error) {
           throw new Error(
-            uploadResponse.requestStatus.errorMessage || "Failed to get upload URL"
+            uploadResponse.requestStatus.errorMessage ||
+              "Failed to get upload URL"
           );
         }
 
@@ -46,57 +48,29 @@ export const useVideoUpload = () => {
         toast.info("⬆️ Uploading video to cloud...", { duration: 5000 });
         await api.fileAPI.uploadToS3(uploadResponse.uploadUrl, file);
 
-        console.log("🎉 Video uploaded successfully! File key:", uploadResponse.fileKey);
-        toast.success(`✅ Video uploaded! File key: ${uploadResponse.fileKey}`, { 
-          duration: 5000 
-        });
-
-        // 3. 提交音乐生成任务
-        toast.info("🎵 Creating soundtrack generation task...", { duration: 3000 });
-        
-        const taskRequest: MusicGenerationRequest = {
-          taskType: "VIDEO_SOUNDTRACK",
-          prompt: description,
-          videoSource: uploadResponse.fileKey,
-          videoSourceType: "FILE_KEY",
-          duration: 30, // 默认30秒
-        };
-
-        const taskResponse = await api.taskAPI.submitTask(taskRequest);
-
-        if (taskResponse.requestStatus.error) {
-          throw new Error(
-            taskResponse.requestStatus.errorMessage || "Task submission failed"
-          );
-        }
-
-        console.log("🎵 Task submitted successfully!", {
-          taskId: taskResponse.taskId,
-          status: taskResponse.status,
-          taskType: taskResponse.taskType,
-          fileKey: uploadResponse.fileKey,
-          response: taskResponse,
-        });
-
+        console.log(
+          "🎉 Video uploaded successfully! File key:",
+          uploadResponse.fileKey
+        );
         toast.success(
-          `🚀 Soundtrack generation started! Task ID: ${taskResponse.taskId}`,
+          `✅ Video uploaded! File key: ${uploadResponse.fileKey}`,
           {
-            duration: 8000,
-            action: {
-              label: "Copy ID",
-              onClick: () => navigator.clipboard.writeText(taskResponse.taskId || ""),
-            },
+            duration: 5000,
           }
         );
 
-        return taskResponse;
+        // 3. 提交音乐生成任务
+        toast.info("🎵 Creating soundtrack generation task...", {
+          duration: 3000,
+        });
       } catch (error) {
         console.error("❌ Upload/Task submission failed:", error);
-        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-        toast.error(`💥 Failed to process request: ${errorMessage}`, { 
-          duration: 6000 
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error occurred";
+        toast.error(`💥 Failed to process request: ${errorMessage}`, {
+          duration: 6000,
         });
-        return null;
+        return;
       } finally {
         setIsUploading(false);
       }
