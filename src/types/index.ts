@@ -103,14 +103,12 @@ export interface RequestStatus {
   errorMessage?: string;
 }
 
-
 export interface PaginationInfo {
   page: number;
   pageSize: number;
   total: number;
   totalPages: number;
 }
-
 
 // Session Management Types
 export type MessageSender = "USER" | "ASSISTANT";
@@ -130,9 +128,8 @@ export interface SongDto {
   songId: string;
   title: string;
   tags: string[];
-  fileKey: string;
+  audioUrl: string;
   duration: number;
-  downloadUrl: string;
   status: SongStatus;
   generationParams?: Record<string, any>;
   createdAt: string;
@@ -170,4 +167,3 @@ export interface SessionUpdateResponse {
   messageUpdates: MessageDto[];
   songUpdates: SongDto[];
 }
-

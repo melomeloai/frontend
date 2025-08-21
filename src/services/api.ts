@@ -36,34 +36,13 @@ function snakeToCamelCase(obj: any): any {
   return camelCaseObj;
 }
 
-// Create axios instance
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000,
-});
-
-// Response interceptor for error handling and key transformation
-api.interceptors.response.use(
-  (response: AxiosResponse) => {
-    // Transform snake_case keys to camelCase
-    if (response.data) {
-      response.data = snakeToCamelCase(response.data);
-    }
-    return response;
-  },
-  (error) => {
-    console.error("API Error:", error);
-    return Promise.reject(error);
-  }
-);
-
 // Helper function to create authenticated API calls
 export const createAuthenticatedAPI = (
   getToken: () => Promise<string | null>
 ) => {
   const authenticatedApi = axios.create({
     baseURL: API_BASE_URL,
-    timeout: 10000,
+    timeout: 60000,
   });
 
   authenticatedApi.interceptors.request.use(

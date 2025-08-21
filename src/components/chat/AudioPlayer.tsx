@@ -41,9 +41,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ song }) => {
   };
 
   const handleDownload = () => {
-    if (song.downloadUrl) {
+    if (song.audioUrl) {
       const link = document.createElement("a");
-      link.href = song.downloadUrl;
+      link.href = song.audioUrl;
       link.download = `${song.title}.mp3`;
       link.click();
     }
@@ -67,7 +67,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ song }) => {
             Status: {song.status.toLowerCase()}
           </p>
         </div>
-        {song.downloadUrl && (
+        {song.audioUrl && (
           <Button
             variant="ghost"
             size="sm"
@@ -80,11 +80,11 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ song }) => {
       </div>
 
       {/* Audio Controls */}
-      {song.downloadUrl && song.status === "COMPLETED" && (
+      {song.audioUrl && song.status === "COMPLETED" && (
         <>
           <audio
             ref={audioRef}
-            src={song.downloadUrl}
+            src={song.audioUrl}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
             onEnded={handleEnded}
