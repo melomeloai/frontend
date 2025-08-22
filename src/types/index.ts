@@ -10,6 +10,7 @@ export interface User {
 export interface CreditInfo {
   permanentCredits: number;
   renewableCredits: number; // Note: API uses "renewableCredits" instead of "resetCredits"
+  frozenCredits: number;
   nextResetTime: string; // ISO datetime string
 }
 
@@ -36,6 +37,7 @@ export interface UserResponse {
 export interface CreditInfoResponse {
   permanentCredits: number;
   renewableCredits: number;
+  frozenCredits: number;
   nextResetTime: string;
 }
 
