@@ -12,7 +12,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { AuthenticatedLayout } from "@/layouts/AuthenticatedLayout";
 import { PublicLayout } from "@/layouts/PublicLayout";
 // Public pages
-import { Home } from "@/pages/public/Home";
 import { Pricing } from "@/pages/public/Pricing";
 // Workspace pages
 import { Create } from "@/pages/workspace/Create";
@@ -30,18 +29,20 @@ if (!clerkPubKey) {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <ClerkProvider appearance={CLERK_APPEARANCE} publishableKey={clerkPubKey}>
         <Router>
           <div className="min-h-screen">
             <Routes>
-              {/* Public routes */}
+              {/* Default route - directly to Create */}
               <Route
                 path={ROUTES.HOME}
                 element={
-                  <PublicLayout>
-                    <Home />
-                  </PublicLayout>
+                  <ProtectedRoute>
+                    <AuthenticatedLayout>
+                      <Create />
+                    </AuthenticatedLayout>
+                  </ProtectedRoute>
                 }
               />
               <Route
@@ -56,17 +57,11 @@ function App() {
               {/* Workspace routes (protected) */}
               <Route
                 path={ROUTES.WORKSPACE}
-                element={<Navigate to={ROUTES.WORKSPACE_CREATE} replace />}
+                element={<Navigate to={ROUTES.HOME} replace />}
               />
               <Route
                 path={ROUTES.WORKSPACE_CREATE}
-                element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <Create />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
-                }
+                element={<Navigate to={ROUTES.HOME} replace />}
               />
               <Route
                 path={ROUTES.WORKSPACE_LIBRARY}

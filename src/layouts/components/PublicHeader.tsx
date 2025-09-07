@@ -31,7 +31,7 @@ export const PublicHeader: React.FC = () => {
             <SignedOut>
               <SignInButton
                 mode="modal"
-                forceRedirectUrl={ROUTES.WORKSPACE_CREATE}
+                forceRedirectUrl={ROUTES.HOME}
               >
                 <button className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
                   Sign In
@@ -41,10 +41,10 @@ export const PublicHeader: React.FC = () => {
 
             <SignedIn>
               <Link
-                to="/workspace"
+                to={ROUTES.HOME}
                 className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
               >
-                Go to Workspace
+                Start Creating
               </Link>
             </SignedIn>
           </div>

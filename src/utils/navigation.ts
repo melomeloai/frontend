@@ -8,6 +8,6 @@ export interface NavigationItem {
 }
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
-  { name: "Create", href: ROUTES.WORKSPACE_CREATE, icon: FileMusic },
+  { name: "Create", href: ROUTES.HOME, icon: FileMusic },
   { name: "Library", href: ROUTES.WORKSPACE_LIBRARY, icon: Library },
 ];

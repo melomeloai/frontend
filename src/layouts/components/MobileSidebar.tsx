@@ -17,13 +17,13 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose })
   const location = useLocation();
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-card border-r border-border">
+    <div className="flex flex-col h-full bg-sidebar border-r border-sidebar-border">
       {/* Mobile header with logo and close button */}
-      <div className="p-4 border-b border-border">
+      <div className="p-4 border-b border-sidebar-border">
         <div className="flex items-center justify-between">
           <Link
             to={ROUTES.HOME}
-            className="text-lg font-bold text-foreground flex items-center"
+            className="text-lg font-bold text-sidebar-foreground flex items-center"
           >
             MeloReels.AI
           </Link>
@@ -48,8 +48,8 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose })
                 className={cn(
                   "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                    : "text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
                 )}
               >
                 <Icon className="h-4 w-4 flex-shrink-0" />
@@ -61,7 +61,7 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose })
       </nav>
 
       {/* Credit Info at bottom */}
-      <div className="p-4 border-t border-border">
+      <div className="p-4 border-t border-sidebar-border">
         <CreditInfo />
       </div>
     </div>

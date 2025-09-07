@@ -5,7 +5,7 @@ import { useAuth } from "@clerk/clerk-react";
 import { ROUTES } from "@/utils/constants";
 
 export const AuthRedirect: React.FC = () => {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isLoaded } = useAuth();
 
   if (!isLoaded) {
     return (
@@ -15,9 +15,6 @@ export const AuthRedirect: React.FC = () => {
     );
   }
 
-  if (isSignedIn) {
-    return <Navigate to={ROUTES.WORKSPACE_CREATE} replace />;
-  }
-
+  // Always redirect to home page, which now shows the Create page
   return <Navigate to={ROUTES.HOME} replace />;
 };
