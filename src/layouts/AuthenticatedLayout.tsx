@@ -20,7 +20,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
 
   const getSidebarWidth = () => {
     if (desktopHooks.isMobile || !desktopHooks.isOpen) return 0;
-    return desktopHooks.isCollapsed ? 80 : 320; // 80px for collapsed, 320px for expanded
+    return desktopHooks.isCollapsed ? 60 : 240; // 60px for collapsed, 240px for expanded
   };
 
   return (

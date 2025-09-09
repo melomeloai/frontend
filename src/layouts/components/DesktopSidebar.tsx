@@ -111,7 +111,7 @@ export const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
     <div
       className={cn(
         "hidden md:block fixed left-0 top-0 h-full z-30 transform transition-all duration-300 ease-in-out",
-        isCollapsed ? "w-20" : "w-80"
+        isCollapsed ? "w-15" : "w-60"
       )}
     >
       {sidebarContent}

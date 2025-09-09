@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -30,7 +29,6 @@ export const AdvancedModeForm: React.FC<AdvancedModeFormProps> = ({
   const [lyrics, setLyrics] = useState("");
   const [duration, setDuration] = useState(60);
   const [bpm, setBpm] = useState(120);
-  const [lyricsEnabled, setLyricsEnabled] = useState(false);
   const [durationEnabled, setDurationEnabled] = useState(false);
   const [bpmEnabled, setBpmEnabled] = useState(false);
 
@@ -39,12 +37,12 @@ export const AdvancedModeForm: React.FC<AdvancedModeFormProps> = ({
 
     const params: MusicGenerationParams = {
       prompt: prompt.trim(),
-      lyricsEnabled,
+      lyricsEnabled: true, // Always enabled now
       durationEnabled,
       bpmEnabled,
     };
 
-    if (lyricsEnabled && lyrics.trim()) {
+    if (lyrics.trim()) {
       params.lyrics = lyrics.trim();
     }
 
@@ -65,19 +63,15 @@ export const AdvancedModeForm: React.FC<AdvancedModeFormProps> = ({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <Label htmlFor="lyrics" className="text-base font-medium">
-            Lyrics (optional)
+            Lyrics
           </Label>
-          <Switch
-            id="lyrics-toggle"
-            checked={lyricsEnabled}
-            onCheckedChange={setLyricsEnabled}
-          />
         </div>
-        <textarea
-          id="lyrics"
-          value={lyrics}
-          onChange={(e) => setLyrics(e.target.value)}
-          placeholder="Enter your lyrics here...
+        <div className="relative">
+          <textarea
+            id="lyrics"
+            value={lyrics}
+            onChange={(e) => setLyrics(e.target.value)}
+            placeholder="Enter your lyrics here...
 
 Example:
 Verse 1:
@@ -87,16 +81,41 @@ Stars are shining oh so bright
 Chorus:
 Dancing in the moonlight glow
 Feel the rhythm, let it flow"
-          disabled={!lyricsEnabled}
-          className={cn(
-            "w-full min-h-[200px] p-4 rounded-xl resize-none",
-            "bg-background/50 border border-border/50",
-            "placeholder:text-muted-foreground/40",
-            "focus:outline-none focus:ring-2 focus:ring-ring",
-            "disabled:opacity-50 disabled:cursor-not-allowed",
-            "transition-opacity"
-          )}
-        />
+            className={cn(
+              "w-full min-h-[200px] p-4 pb-14 rounded-xl resize-none",
+              "bg-background/50 border border-border/50",
+              "placeholder:text-muted-foreground/40",
+              "focus:outline-none focus:ring-2 focus:ring-ring",
+              "transition-opacity"
+            )}
+          />
+          <div className="absolute bottom-3 right-3 flex gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs"
+              onClick={() => {
+                // Handle Lyrics By Line
+                console.log("Lyrics By Line clicked");
+              }}
+            >
+              Lyrics By Line
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs"
+              onClick={() => {
+                // Handle Full Lyrics
+                console.log("Full Lyrics clicked");
+              }}
+            >
+              Full Lyrics
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Duration Section */}
@@ -111,26 +130,24 @@ Feel the rhythm, let it flow"
             onCheckedChange={setDurationEnabled}
           />
         </div>
-        <div className={cn(
-          "space-y-2",
-          !durationEnabled && "opacity-50 pointer-events-none"
-        )}>
-          <Slider
-            id="duration"
-            value={[duration]}
-            onValueChange={([value]) => setDuration(value)}
-            min={30}
-            max={300}
-            step={10}
-            disabled={!durationEnabled}
-            className="w-full"
-          />
-          <div className="flex justify-end">
-            <span className="text-sm text-muted-foreground">
-              {durationEnabled ? `${duration} seconds` : "Default"}
-            </span>
+        {durationEnabled && (
+          <div className="space-y-2">
+            <Slider
+              id="duration"
+              value={[duration]}
+              onValueChange={([value]) => setDuration(value)}
+              min={30}
+              max={300}
+              step={10}
+              className="w-full"
+            />
+            <div className="flex justify-end">
+              <span className="text-sm text-muted-foreground">
+                {duration} seconds
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* BPM Section */}
@@ -145,60 +162,62 @@ Feel the rhythm, let it flow"
             onCheckedChange={setBpmEnabled}
           />
         </div>
-        <div className={cn(
-          "space-y-4",
-          !bpmEnabled && "opacity-50 pointer-events-none"
-        )}>
-          {/* Tempo Labels */}
-          <div className="flex items-center justify-between px-1">
-            <span className={cn(
-              "text-sm transition-colors",
-              bpmEnabled && bpm < 80 ? "text-foreground font-medium" : "text-muted-foreground"
-            )}>
-              Slow
-            </span>
-            <span className={cn(
-              "px-4 py-1.5 rounded-full text-sm transition-all",
-              bpmEnabled && bpm >= 80 && bpm <= 140
-                ? "bg-muted text-foreground font-medium"
-                : "text-muted-foreground"
-            )}>
-              Normal
-            </span>
-            <span className={cn(
-              "text-sm transition-colors",
-              bpmEnabled && bpm > 140 ? "text-foreground font-medium" : "text-muted-foreground"
-            )}>
-              Fast
-            </span>
+        {bpmEnabled && (
+          <div className="space-y-4">
+            {/* Tempo Labels */}
+            <div className="flex items-center justify-between px-1">
+              <span className={cn(
+                "text-sm transition-colors",
+                bpm < 80 ? "text-foreground font-medium" : "text-muted-foreground"
+              )}>
+                Slow
+              </span>
+              <span className={cn(
+                "px-4 py-1.5 rounded-full text-sm transition-all",
+                bpm >= 80 && bpm <= 140
+                  ? "bg-muted text-foreground font-medium"
+                  : "text-muted-foreground"
+              )}>
+                Normal
+              </span>
+              <span className={cn(
+                "text-sm transition-colors",
+                bpm > 140 ? "text-foreground font-medium" : "text-muted-foreground"
+              )}>
+                Fast
+              </span>
+            </div>
+            <Slider
+              id="bpm"
+              value={[bpm]}
+              onValueChange={([value]) => setBpm(value)}
+              min={60}
+              max={180}
+              step={5}
+              className="w-full"
+            />
+            <div className="flex justify-center">
+              <span className="text-sm text-muted-foreground">
+                {bpm} BPM
+              </span>
+            </div>
           </div>
-          <Slider
-            id="bpm"
-            value={[bpm]}
-            onValueChange={([value]) => setBpm(value)}
-            min={60}
-            max={180}
-            step={5}
-            disabled={!bpmEnabled}
-            className="w-full"
-          />
-          <div className="flex justify-center">
-            <span className="text-sm text-muted-foreground">
-              {bpmEnabled ? `${bpm} BPM` : "120 BPM"}
-            </span>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Prompt Section */}
       <div className="space-y-4 pt-4 border-t border-border/50">
+        <Label htmlFor="prompt" className="text-base font-medium">
+          Describe Your Music
+        </Label>
         <div className="relative">
           <textarea
+            id="prompt"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Describe the music you want to create..."
             className={cn(
-              "w-full min-h-[120px] p-4 pr-16 rounded-xl resize-none",
+              "w-full min-h-[120px] p-4 pr-28 rounded-xl resize-none",
               "bg-background/50 border border-border/50",
               "placeholder:text-muted-foreground/60",
               "focus:outline-none focus:ring-2 focus:ring-ring"
@@ -213,13 +232,15 @@ Feel the rhythm, let it flow"
           <Button
             onClick={handleSubmit}
             disabled={!prompt.trim() || isGenerating}
-            size="icon"
-            className="absolute bottom-4 right-4 h-10 w-10 rounded-xl bg-muted hover:bg-muted/80 text-foreground transition-colors"
+            className="absolute bottom-4 right-4 h-9 px-4 rounded-xl bg-muted hover:bg-muted/80 text-foreground transition-colors"
           >
             {isGenerating ? (
-              <div className="w-4 h-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
+                <span>Generating...</span>
+              </div>
             ) : (
-              <ArrowRight className="h-4 w-4" />
+              <span>Generate</span>
             )}
           </Button>
         </div>

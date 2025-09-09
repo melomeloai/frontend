@@ -17,6 +17,7 @@ import { Pricing } from "@/pages/public/Pricing";
 import { Create } from "@/pages/workspace/Create";
 import { Library } from "@/pages/workspace/Library";
 import { Plan } from "@/pages/workspace/Plan";
+import { Project } from "@/pages/workspace/Project";
 import { SessionChat } from "@/pages/workspace/sessions/SessionChat";
 import { CLERK_APPEARANCE, ROUTES } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
@@ -89,6 +90,16 @@ function App() {
                   <ProtectedRoute>
                     <AuthenticatedLayout>
                       <SessionChat />
+                    </AuthenticatedLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.WORKSPACE_PROJECT}
+                element={
+                  <ProtectedRoute>
+                    <AuthenticatedLayout>
+                      <Project />
                     </AuthenticatedLayout>
                   </ProtectedRoute>
                 }

@@ -6,15 +6,12 @@ import { SampleGallery } from "@/components/landing/SampleGallery";
 import { AdvancedModeForm, type MusicGenerationParams } from "@/components/create/AdvancedModeForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { createAuthenticatedAPI } from "@/services/api";
-import { useAuth } from "@clerk/clerk-react";
 
 export const Create: React.FC = () => {
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [mode, setMode] = useState<"basic" | "advanced">("basic");
   const navigate = useNavigate();
-  const { getToken } = useAuth();
 
   const handleGenerate = async (params?: MusicGenerationParams) => {
     const finalPrompt = params?.prompt || prompt.trim();
@@ -22,40 +19,25 @@ export const Create: React.FC = () => {
 
     setIsGenerating(true);
     try {
-      const api = createAuthenticatedAPI(getToken);
+      // Generate a temporary project ID (in real app, this would come from API)
+      const projectId = `project-${Date.now()}`;
 
-      // 1. Create new session
-      const sessionResponse = await api.sessionAPI.createSession();
+      // Store project data temporarily (in real app, this would be API call)
+      const projectData = {
+        id: projectId,
+        prompt: finalPrompt,
+        lyrics: params?.lyricsEnabled ? params.lyrics : undefined,
+        duration: params?.durationEnabled ? params.duration : undefined,
+        bpm: params?.bpmEnabled ? params.bpm : undefined,
+        createdAt: new Date().toISOString(),
+        status: "generating"
+      };
 
-      if (!sessionResponse.sessionId) {
-        throw new Error("Failed to create session");
-      }
+      // Store in sessionStorage temporarily
+      sessionStorage.setItem(`project-${projectId}`, JSON.stringify(projectData));
 
-      // 2. Build the message content with advanced params if provided
-      let messageContent = finalPrompt;
-      if (params) {
-        const advancedParams = [];
-        if (params.lyricsEnabled && params.lyrics) {
-          advancedParams.push(`Lyrics: ${params.lyrics}`);
-        }
-        if (params.durationEnabled && params.duration) {
-          advancedParams.push(`Duration: ${params.duration} seconds`);
-        }
-        if (params.bpmEnabled && params.bpm) {
-          advancedParams.push(`BPM: ${params.bpm}`);
-        }
-        if (advancedParams.length > 0) {
-          messageContent = `${finalPrompt}\n\nAdvanced parameters:\n${advancedParams.join("\n")}`;
-        }
-      }
-
-      // 3. Send the user message to the session
-      await api.sessionAPI.sendMessage(sessionResponse.sessionId, {
-        content: messageContent,
-      });
-
-      // 4. Navigate to the session chat page
-      navigate(`/workspace/sessions/${sessionResponse.sessionId}`);
+      // Navigate to project page
+      navigate(`/workspace/projects/${projectId}`);
     } catch (error) {
       console.error("Failed to generate music:", error);
       setIsGenerating(false);
@@ -65,8 +47,8 @@ export const Create: React.FC = () => {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
-      <div className="text-center space-y-6 pt-8">
-        <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+      <div className="text-center space-y-6 pt-16">
+        <h1 className="text-4xl md:text-6xl font-semibold text-foreground">
           Begin your musical journey.
         </h1>
       </div>
@@ -100,16 +82,16 @@ export const Create: React.FC = () => {
       </div>
 
       {/* Input Section */}
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         {mode === "basic" ? (
-          <div className="bg-background/50 backdrop-blur-sm rounded-3xl border border-border/50 p-4">
+          <div className="bg-background rounded-2xl border-2 border-border shadow-sm p-3">
             {/* Main Input */}
-            <div className="mb-4">
+            <div className="mb-3">
               <Input
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Describe your song..."
-                className="w-full h-16 text-lg px-6 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60"
+                className="w-full h-14 text-base px-4 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -126,7 +108,7 @@ export const Create: React.FC = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-10 px-3 rounded-xl hover:bg-muted"
+                  className="h-8 px-2 rounded-lg hover:bg-muted"
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -137,11 +119,11 @@ export const Create: React.FC = () => {
                 <Button
                   onClick={() => handleGenerate()}
                   disabled={!prompt.trim() || isGenerating}
-                  className="h-10 px-6 rounded-xl bg-muted hover:bg-muted/80 text-foreground font-medium transition-colors"
+                  className="h-9 px-5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors"
                 >
                   {isGenerating ? (
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
                       <span>Generating...</span>
                     </div>
                   ) : (
@@ -152,7 +134,7 @@ export const Create: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="bg-background/50 backdrop-blur-sm rounded-3xl border border-border/50 p-8">
+          <div className="bg-background rounded-2xl border-2 border-border shadow-sm p-6">
             <AdvancedModeForm
               onGenerate={handleGenerate}
               isGenerating={isGenerating}

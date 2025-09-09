@@ -142,43 +142,276 @@ const SAMPLE_GALLERY_ITEMS: GalleryItem[] = [
 ];
 
 export const SampleGallery: React.FC = () => {
-  const [playingId, setPlayingId] = useState<string | null>(null);
-
-  const handlePlay = (id: string) => {
-    setPlayingId(playingId === id ? null : id);
-    // Here you would typically handle actual audio playback
-    console.log(`Playing/pausing audio for item ${id}`);
-  };
+  const [activeTab, setActiveTab] = useState("Music for Videos");
+  
+  const tabs = [
+    "Music for Videos",
+    "Music for Ads", 
+    "Music Editing",
+    "Music Gift Cards"
+  ];
 
   return (
     <div className="py-16 bg-muted/10">
-      <div className="max-w-6xl">
-        {/* Section Header */}
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Featured Soundtracks
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Discover the perfect sound for your content. Each track is carefully
-            crafted by AI to match different video styles and moods.
-          </p>
+      <div className="max-w-6xl mx-auto">
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-12">
+          <div className="bg-muted/30 rounded-2xl p-1 inline-flex">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all ${
+                  activeTab === tab
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {SAMPLE_GALLERY_ITEMS.map((item) => (
-            <GalleryCard key={item.id} item={item} onPlay={handlePlay} />
-          ))}
-        </div>
+        {/* Tab Content */}
+        <div className="text-center space-y-8">
+          {activeTab === "Music for Videos" && (
+            <>
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground max-w-4xl mx-auto">
+                  Create perfect soundtracks for your video content with AI-generated music tailored to your style and mood.
+                </p>
+              </div>
+              
+              {/* Video Demo Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                {[
+                  {
+                    title: "Drop a dark techno track and hype visualizer",
+                    description: "1. Drop a dark techno track with driving bassline\n2. Show the Hypersphere visualizer\n3. Explain how I can ask for changes to the visualizer",
+                    bgColor: "bg-gradient-to-br from-teal-500 to-green-600"
+                  },
+                  {
+                    title: "What has @Aoh been making recently?",
+                    description: "",
+                    bgColor: "bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500"
+                  },
+                  {
+                    title: "Make a hyperpop song about the perfect summer",
+                    description: "",
+                    bgColor: "bg-gradient-to-br from-gray-700 to-gray-900"
+                  },
+                  {
+                    title: "Give me stems for a hard-hitting trap beat with 808s",
+                    description: "",
+                    bgColor: "bg-gradient-to-br from-teal-600 to-cyan-700"
+                  }
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className={`${item.bgColor} rounded-2xl p-4 aspect-square flex flex-col justify-between text-white text-left relative overflow-hidden group hover:scale-105 transition-transform duration-200`}
+                  >
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="relative z-10">
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                          <span className="text-xs">⚡</span>
+                        </div>
+                        <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                          <span className="text-xs">+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-sm font-medium leading-tight mb-1">
+                        {item.title}
+                      </h3>
+                      {item.description && (
+                        <p className="text-xs opacity-80 text-white/70">
+                          {item.description.split('\n').map((line, i) => (
+                            <span key={i}>
+                              {line}
+                              {i < item.description.split('\n').length - 1 && <br />}
+                            </span>
+                          ))}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          
+          {activeTab === "Music for Ads" && (
+            <>
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground max-w-4xl mx-auto">
+                  Generate compelling background music for advertisements that captures attention and drives engagement.
+                </p>
+              </div>
+              
+              {/* Ad Demo Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                {[
+                  {
+                    title: "Upbeat commercial jingle for tech startup",
+                    bgColor: "bg-gradient-to-br from-blue-500 to-indigo-600"
+                  },
+                  {
+                    title: "Emotional storytelling music for brand campaign",
+                    bgColor: "bg-gradient-to-br from-purple-500 to-pink-600"
+                  },
+                  {
+                    title: "Energetic product launch soundtrack",
+                    bgColor: "bg-gradient-to-br from-orange-500 to-red-600"
+                  },
+                  {
+                    title: "Sophisticated luxury brand background music",
+                    bgColor: "bg-gradient-to-br from-gray-600 to-gray-800"
+                  }
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className={`${item.bgColor} rounded-2xl p-4 aspect-square flex flex-col justify-between text-white text-left relative overflow-hidden group hover:scale-105 transition-transform duration-200`}
+                  >
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="relative z-10 flex justify-between items-start">
+                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                        <span className="text-xs">🎵</span>
+                      </div>
+                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                        <span className="text-xs">+</span>
+                      </div>
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-sm font-medium leading-tight">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          
+          {activeTab === "Music Editing" && (
+            <>
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground max-w-4xl mx-auto">
+                  Professional music editing tools powered by AI to refine and customize your audio tracks perfectly.
+                </p>
+              </div>
+              
+              {/* Editing Demo Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                {[
+                  {
+                    title: "Auto-master your track with AI precision",
+                    bgColor: "bg-gradient-to-br from-green-500 to-teal-600"
+                  },
+                  {
+                    title: "Remove vocals and create instrumental",
+                    bgColor: "bg-gradient-to-br from-blue-500 to-purple-600"
+                  },
+                  {
+                    title: "Adjust tempo and pitch seamlessly",
+                    bgColor: "bg-gradient-to-br from-red-500 to-pink-600"
+                  },
+                  {
+                    title: "Generate harmonies and backing tracks",
+                    bgColor: "bg-gradient-to-br from-yellow-500 to-orange-600"
+                  }
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className={`${item.bgColor} rounded-2xl p-4 aspect-square flex flex-col justify-between text-white text-left relative overflow-hidden group hover:scale-105 transition-transform duration-200`}
+                  >
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="relative z-10 flex justify-between items-start">
+                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                        <span className="text-xs">🎛️</span>
+                      </div>
+                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                        <span className="text-xs">+</span>
+                      </div>
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-sm font-medium leading-tight">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          
+          {activeTab === "Music Gift Cards" && (
+            <>
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground max-w-4xl mx-auto">
+                  Share the gift of music creation with friends and colleagues through our flexible gift card options.
+                </p>
+              </div>
+              
+              {/* Gift Card Demo Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                {[
+                  {
+                    title: "$25 Starter Pack",
+                    description: "Perfect for beginners",
+                    bgColor: "bg-gradient-to-br from-emerald-500 to-teal-600"
+                  },
+                  {
+                    title: "$50 Creator Bundle",
+                    description: "For aspiring musicians",
+                    bgColor: "bg-gradient-to-br from-blue-500 to-indigo-600"
+                  },
+                  {
+                    title: "$100 Pro Package",
+                    description: "For serious creators",
+                    bgColor: "bg-gradient-to-br from-purple-500 to-pink-600"
+                  },
+                  {
+                    title: "Custom Amount",
+                    description: "Choose your own value",
+                    bgColor: "bg-gradient-to-br from-orange-500 to-red-600"
+                  }
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className={`${item.bgColor} rounded-2xl p-4 aspect-square flex flex-col justify-between text-white text-left relative overflow-hidden group hover:scale-105 transition-transform duration-200`}
+                  >
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="relative z-10 flex justify-between items-start">
+                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                        <span className="text-xs">🎁</span>
+                      </div>
+                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                        <span className="text-xs">+</span>
+                      </div>
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-sm font-medium leading-tight mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs opacity-80 text-white/70">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
 
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-4">
-            Ready to create your own custom soundtrack?
-          </p>
-          <Button className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all duration-200 transform hover:scale-105">
-            Get Started Free
-          </Button>
+          {/* Call to Action */}
+          <div className="pt-6">
+            <Button className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all duration-200 transform hover:scale-105">
+              Get Started Free
+            </Button>
+          </div>
         </div>
       </div>
     </div>

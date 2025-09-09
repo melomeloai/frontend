@@ -17,6 +17,7 @@ export const ROUTES = {
   WORKSPACE_LIBRARY: "/workspace/library",
   WORKSPACE_PLAN: "/workspace/plan",
   WORKSPACE_SESSION: "/workspace/sessions/:sessionId",
+  WORKSPACE_PROJECT: "/workspace/projects/:projectId",
 } as const;
 
 // File Upload Limits
