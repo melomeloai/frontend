@@ -84,14 +84,14 @@ export const Create: React.FC = () => {
       {/* Input Section */}
       <div className="max-w-3xl mx-auto">
         {mode === "basic" ? (
-          <div className="bg-background rounded-2xl border-2 border-border shadow-sm p-3">
+          <div className="bg-background rounded-2xl shadow-sm p-3">
             {/* Main Input */}
             <div className="mb-3">
               <Input
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Describe your song..."
-                className="w-full h-14 text-base px-4 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60"
+                placeholder="Type your idea, click 'Create' to get a video"
+                className="w-full h-14 text-base px-4 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60 focus:border-0"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -119,22 +119,22 @@ export const Create: React.FC = () => {
                 <Button
                   onClick={() => handleGenerate()}
                   disabled={!prompt.trim() || isGenerating}
-                  className="h-9 px-5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors"
+                  className="h-9 px-5 rounded-lg bg-foreground hover:bg-foreground/90 text-background font-medium transition-colors"
                 >
                   {isGenerating ? (
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin" />
                       <span>Generating...</span>
                     </div>
                   ) : (
-                    <span>Generate</span>
+                    <span>Generate Music</span>
                   )}
                 </Button>
               </div>
             </div>
           </div>
         ) : (
-          <div className="bg-background rounded-2xl border-2 border-border shadow-sm p-6">
+          <div className="bg-background rounded-2xl shadow-sm p-6">
             <AdvancedModeForm
               onGenerate={handleGenerate}
               isGenerating={isGenerating}
