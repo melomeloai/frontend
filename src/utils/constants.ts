@@ -16,6 +16,7 @@ export const ROUTES = {
   WORKSPACE_CREATE: "/workspace/create",
   WORKSPACE_LIBRARY: "/workspace/library",
   WORKSPACE_PLAN: "/workspace/plan",
+  WORKSPACE_API_ACCESS: "/workspace/api-access",
   WORKSPACE_SESSION: "/workspace/sessions/:sessionId",
   WORKSPACE_PROJECT: "/workspace/projects/:projectId",
 } as const;

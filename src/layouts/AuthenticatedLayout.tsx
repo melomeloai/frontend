@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { MobileSidebar } from "./components/MobileSidebar";
 import { DesktopSidebar } from "./components/DesktopSidebar";
 import { WorkspaceHeader } from "./components/WorkspaceHeader";
+import { TopHeader } from "./components/TopHeader";
 
 interface AuthenticatedLayoutProps {
   children: React.ReactNode;
@@ -48,6 +49,11 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
           marginLeft: !desktopHooks.isMobile && desktopHooks.isOpen ? `${getSidebarWidth()}px` : 0,
         }}
       >
+        {/* Desktop header with credits and user menu */}
+        {!desktopHooks.isMobile && (
+          <TopHeader />
+        )}
+        
         {/* Mobile header with user menu */}
         {desktopHooks.isMobile && (
           <WorkspaceHeader 
@@ -55,7 +61,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
             isMobile={desktopHooks.isMobile} 
           />
         )}
-        <main className="p-6 md:p-12">{children}</main>
+        <main className={cn("p-6 md:p-12", !desktopHooks.isMobile && "pt-2")}>{children}</main>
       </div>
     </div>
   );

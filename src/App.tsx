@@ -18,6 +18,7 @@ import { Create } from "@/pages/workspace/Create";
 import { Library } from "@/pages/workspace/Library";
 import { Plan } from "@/pages/workspace/Plan";
 import { Project } from "@/pages/workspace/Project";
+import { APIAccess } from "@/pages/workspace/APIAccess";
 import { SessionChat } from "@/pages/workspace/sessions/SessionChat";
 import { CLERK_APPEARANCE, ROUTES } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
@@ -80,6 +81,16 @@ function App() {
                   <ProtectedRoute>
                     <AuthenticatedLayout>
                       <Plan />
+                    </AuthenticatedLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.WORKSPACE_API_ACCESS}
+                element={
+                  <ProtectedRoute>
+                    <AuthenticatedLayout>
+                      <APIAccess />
                     </AuthenticatedLayout>
                   </ProtectedRoute>
                 }
