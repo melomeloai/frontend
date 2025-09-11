@@ -180,4 +180,38 @@
   .bg-gradient-radial {
     background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
   }
+  
+  /* Main Slogan Styles */
+  .main-slogan {
+    font-size: 3.2rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    word-spacing: 0.1em;
+  }
+  
+  .function-text {
+    color: #333333;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  
+  .brand-name {
+    color: #000000;
+    font-weight: 700;
+  }
+  
+  /* Responsive adjustments for slogan */
+  @media (max-width: 768px) {
+    .main-slogan {
+      font-size: 2.4rem;
+      white-space: normal;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-slogan {
+      font-size: 2rem;
+    }
+  }
 }

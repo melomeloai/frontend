@@ -31,9 +31,13 @@ export const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
           {!isCollapsed && (
             <Link
               to={ROUTES.HOME}
-              className="text-lg font-bold text-sidebar-foreground flex items-center"
+              className="flex items-center"
             >
-              MeloReels.AI
+              <img 
+                src="/melofm_logo_cropped.jpg" 
+                alt="melofm"
+                className="h-8 object-contain"
+              />
             </Link>
           )}
           <Button 

@@ -27,9 +27,13 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
           )}
           <Link
             to={ROUTES.HOME}
-            className="text-lg md:text-xl font-bold text-foreground flex items-center"
+            className="flex items-center"
           >
-            MeloReels.AI
+            <img 
+              src="/melofm_logo_cropped.jpg" 
+              alt="melofm"
+              className="h-8 md:h-10 object-contain"
+            />
           </Link>
         </div>
 

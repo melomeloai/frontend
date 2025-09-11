@@ -48,8 +48,13 @@ export const Create: React.FC = () => {
     <div className="space-y-16">
       {/* Hero Section */}
       <div className="text-center space-y-6 pt-16">
-        <h1 className="text-4xl md:text-6xl font-semibold text-foreground">
-          Begin your musical journey.
+        <h1 className="main-slogan flex flex-wrap items-center justify-center gap-4">
+          <span className="function-text">Create and Remix Music with</span>
+          <img 
+            src="/melofm_logo_cropped.jpg" 
+            alt="melofm"
+            className="h-12 md:h-16 lg:h-20 object-contain"
+          />
         </h1>
       </div>
 
