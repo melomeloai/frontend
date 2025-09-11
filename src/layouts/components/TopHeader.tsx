@@ -1,5 +1,5 @@
 import React from "react";
-import { HelpCircle, Book, Sun } from "lucide-react";
+import { HelpCircle, Book } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -55,14 +55,6 @@ export const TopHeader: React.FC = () => {
         className="w-9 h-9 p-0 rounded-full bg-muted/50 hover:bg-muted border border-border/30"
       >
         <Book className="h-4 w-4" />
-      </Button>
-
-      <Button 
-        variant="ghost" 
-        size="sm"
-        className="w-9 h-9 p-0 rounded-full bg-muted/50 hover:bg-muted border border-border/30"
-      >
-        <Sun className="h-4 w-4" />
       </Button>
 
       {/* User Avatar */}

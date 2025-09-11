@@ -19,6 +19,7 @@ import { Library } from "@/pages/workspace/Library";
 import { Plan } from "@/pages/workspace/Plan";
 import { Project } from "@/pages/workspace/Project";
 import { APIAccess } from "@/pages/workspace/APIAccess";
+import { EditRemix } from "@/pages/workspace/EditRemix";
 import { SessionChat } from "@/pages/workspace/sessions/SessionChat";
 import { CLERK_APPEARANCE, ROUTES } from "@/utils/constants";
 import { ClerkProvider } from "@clerk/clerk-react";
@@ -111,6 +112,16 @@ function App() {
                   <ProtectedRoute>
                     <AuthenticatedLayout>
                       <Project />
+                    </AuthenticatedLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.WORKSPACE_EDIT_REMIX}
+                element={
+                  <ProtectedRoute>
+                    <AuthenticatedLayout>
+                      <EditRemix />
                     </AuthenticatedLayout>
                   </ProtectedRoute>
                 }

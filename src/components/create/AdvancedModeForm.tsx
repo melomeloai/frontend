@@ -59,6 +59,31 @@ export const AdvancedModeForm: React.FC<AdvancedModeFormProps> = ({
 
   return (
     <div className="space-y-8">
+      {/* Prompt Section - Moved to top */}
+      <div className="space-y-4">
+        <Label htmlFor="prompt" className="text-base font-medium">
+          Describe Your Music
+        </Label>
+        <textarea
+          id="prompt"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Describe the music you want to create..."
+          className={cn(
+            "w-full min-h-[120px] p-4 rounded-xl resize-none",
+            "bg-background/50 border border-border/50",
+            "placeholder:text-muted-foreground/60",
+            "focus:outline-none focus:ring-2 focus:ring-ring"
+          )}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && e.metaKey) {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
+        />
+      </div>
+
       {/* Lyrics Section */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -205,45 +230,22 @@ Feel the rhythm, let it flow"
         )}
       </div>
 
-      {/* Prompt Section */}
-      <div className="space-y-4 pt-4 border-t border-border/50">
-        <Label htmlFor="prompt" className="text-base font-medium">
-          Describe Your Music
-        </Label>
-        <div className="relative">
-          <textarea
-            id="prompt"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Describe the music you want to create..."
-            className={cn(
-              "w-full min-h-[120px] p-4 pr-28 rounded-xl resize-none",
-              "bg-background/50 border border-border/50",
-              "placeholder:text-muted-foreground/60",
-              "focus:outline-none focus:ring-2 focus:ring-ring"
-            )}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && e.metaKey) {
-                e.preventDefault();
-                handleSubmit();
-              }
-            }}
-          />
-          <Button
-            onClick={handleSubmit}
-            disabled={!prompt.trim() || isGenerating}
-            className="absolute bottom-4 right-4 h-9 px-4 rounded-xl bg-muted hover:bg-muted/80 text-foreground transition-colors"
-          >
-            {isGenerating ? (
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
-                <span>Generating...</span>
-              </div>
-            ) : (
-              <span>Generate</span>
-            )}
-          </Button>
-        </div>
+      {/* Create Button - Bottom Right */}
+      <div className="flex justify-end pt-4">
+        <Button
+          onClick={handleSubmit}
+          disabled={!prompt.trim() || isGenerating}
+          className="h-9 px-6 rounded-xl bg-muted hover:bg-muted/80 text-foreground transition-colors"
+        >
+          {isGenerating ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
+              <span>Generating...</span>
+            </div>
+          ) : (
+            <span>Create</span>
+          )}
+        </Button>
       </div>
     </div>
   );

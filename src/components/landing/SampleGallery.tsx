@@ -147,8 +147,8 @@ export const SampleGallery: React.FC = () => {
   const tabs = [
     "Music for Videos",
     "Music for Ads", 
-    "Music Editing",
-    "Music Gift Cards"
+    "Music Gift Cards",
+    "Music Editing"
   ];
 
   return (
