@@ -8,6 +8,12 @@ import { AdvancedModeForm, type MusicGenerationParams } from "@/components/creat
 import { EditRemixForm } from "@/components/create/EditRemixForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Create: React.FC = () => {
   const [prompt, setPrompt] = useState("");
@@ -103,7 +109,7 @@ export const Create: React.FC = () => {
               <Input
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Type your idea, click 'Create' to get a video"
+                placeholder="Describe your music, e.g.folk, pop"
                 className="w-full h-16 text-base px-4 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60 focus:border-0 shadow-none focus-visible:border-0"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
@@ -118,13 +124,33 @@ export const Create: React.FC = () => {
             <div className="flex items-center justify-between -mt-1">
               {/* Left Controls */}
               <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 px-2 rounded-lg hover:bg-muted"
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 px-2 rounded-lg hover:bg-muted"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-auto min-w-0 p-1">
+                    <DropdownMenuItem className="flex items-center justify-center cursor-pointer p-2 rounded-md hover:bg-muted/50">
+                      <img 
+                        src="/upload_audio.png" 
+                        alt="Upload Audio" 
+                        className="w-6 h-6"
+                      />
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="flex items-center justify-center cursor-pointer p-2 rounded-md hover:bg-muted/50">
+                      <img 
+                        src="/upload_video.png" 
+                        alt="Upload Video" 
+                        className="w-6 h-6"
+                      />
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
 
               {/* Right Controls */}
