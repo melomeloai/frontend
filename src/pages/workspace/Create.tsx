@@ -6,7 +6,6 @@ import { ROUTES } from "@/utils/constants";
 
 import { SampleGallery } from "@/components/landing/SampleGallery";
 import { AdvancedModeForm, type MusicGenerationParams } from "@/components/create/AdvancedModeForm";
-import { EditRemixForm } from "@/components/create/EditRemixForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,7 +21,7 @@ export const Create: React.FC = () => {
   const [mode, setMode] = useState<"simple" | "custom" | "edit">("simple");
   const [showSignIn, setShowSignIn] = useState(false);
   const navigate = useNavigate();
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn } = useAuth();
 
   const handleGenerate = async (params?: MusicGenerationParams) => {
     if (!isSignedIn) {

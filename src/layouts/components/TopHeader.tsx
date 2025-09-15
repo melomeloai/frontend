@@ -2,7 +2,6 @@ import React from "react";
 import { HelpCircle, Book } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { useCredits } from "@/hooks/useCredits";
 

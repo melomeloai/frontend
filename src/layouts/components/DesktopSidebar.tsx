@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { PanelLeftClose, PanelLeftOpen, Youtube, Music, Instagram } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { UserMenu } from "@/components/auth/UserMenu";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/utils/constants";
 import { NAVIGATION_ITEMS } from "@/utils/navigation";

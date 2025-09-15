@@ -1,23 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { 
-  ArrowLeft, 
-  Play, 
-  Pause, 
-  Download, 
-  Share2, 
-  ThumbsUp, 
+import {
+  ArrowLeft,
+  Play,
+  Pause,
+  Download,
+  Share2,
+  ThumbsUp,
   ThumbsDown,
   SkipBack,
   SkipForward,
-  Volume2,
-  Maximize2,
-  History,
-  X
+  History
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 
 interface ProjectData {
@@ -182,22 +178,6 @@ Outro
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const formatLyrics = (lyrics: string) => {
-    return lyrics.split('\n').map((line, index) => {
-      const isSection = ['Intro', 'Verse', 'Pre-Chorus', 'Chorus', 'Bridge', 'Final Chorus', 'Outro'].some(
-        section => line.trim().startsWith(section)
-      );
-      return (
-        <div key={index} className={cn(
-          "py-1",
-          line.trim().startsWith('(') ? "text-muted-foreground italic" : "",
-          isSection ? "font-semibold text-foreground mt-4 first:mt-0" : ""
-        )}>
-          {line || <br />}
-        </div>
-      );
-    });
-  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

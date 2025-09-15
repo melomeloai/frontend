@@ -1,152 +1,13 @@
-import { Play } from "lucide-react";
 import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-interface GalleryItem {
-  id: string;
-  title: string;
-  category: string;
-  thumbnail: string;
-  duration: string;
-  description: string;
-}
-
-interface GalleryCardProps {
-  item: GalleryItem;
-  onPlay: (id: string) => void;
-}
-
-const GalleryCard: React.FC<GalleryCardProps> = ({ item, onPlay }) => {
-  return (
-    <div className="bg-card backdrop-blur-sm rounded-xl overflow-hidden hover:bg-card/90 hover:-translate-y-1 transition-all duration-300 group border border-border/50">
-      {/* Video Thumbnail */}
-      <div className="relative aspect-video bg-gray-800 overflow-hidden">
-        <img
-          src={item.thumbnail}
-          alt={item.title}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            // Fallback to gradient background if image fails to load
-            e.currentTarget.style.display = "none";
-          }}
-        />
-
-        {/* Play Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <Button
-            onClick={() => onPlay(item.id)}
-            className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 border border-white/20 p-0 flex items-center justify-center"
-          >
-            <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
-          </Button>
-        </div>
-
-        {/* Duration Badge */}
-        <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
-          {item.duration}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-4 space-y-2">
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-foreground text-sm line-clamp-1">
-            {item.title}
-          </h3>
-          <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full whitespace-nowrap">
-            {item.category}
-          </span>
-        </div>
-        <p className="text-xs text-muted-foreground line-clamp-2">
-          {item.description}
-        </p>
-      </div>
-    </div>
-  );
-};
-
-// Mock data for gallery items
-const SAMPLE_GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: "1",
-    title: "Epic Adventure Journey",
-    category: "Travel Vlog",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "2:34",
-    description:
-      "Cinematic orchestral music perfect for travel vlogs and adventure content",
-  },
-  {
-    id: "2",
-    title: "Tech Product Showcase",
-    category: "Product Demo",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "1:45",
-    description:
-      "Modern electronic beats ideal for product demonstrations and tech reviews",
-  },
-  {
-    id: "3",
-    title: "Cozy Coffee Morning",
-    category: "Lifestyle",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "3:12",
-    description: "Warm acoustic melodies for lifestyle content and daily vlogs",
-  },
-  {
-    id: "4",
-    title: "High Energy Workout",
-    category: "Fitness",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "2:58",
-    description:
-      "Pumping electronic music to motivate fitness and workout videos",
-  },
-  {
-    id: "5",
-    title: "Peaceful Nature Walk",
-    category: "Documentary",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "4:21",
-    description:
-      "Ambient nature sounds mixed with gentle piano for documentary content",
-  },
-  {
-    id: "6",
-    title: "Corporate Presentation",
-    category: "Business",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "1:30",
-    description:
-      "Professional background music for corporate videos and presentations",
-  },
-  {
-    id: "7",
-    title: "Gaming Highlights Reel",
-    category: "Gaming",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "2:15",
-    description:
-      "Dynamic electronic music perfect for gaming montages and highlights",
-  },
-  {
-    id: "8",
-    title: "Food Recipe Tutorial",
-    category: "Cooking",
-    thumbnail: "/api/placeholder/400/225",
-    duration: "3:45",
-    description:
-      "Upbeat and friendly music for cooking shows and recipe tutorials",
-  },
-];
-
 export const SampleGallery: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Music for Videos");
-  
+
   const tabs = [
     "Music for Videos",
-    "Music for Ads", 
+    "Music for Ads",
     "Music Gift Cards",
     "Music Editing"
   ];
@@ -180,7 +41,7 @@ export const SampleGallery: React.FC = () => {
         <div className="text-center space-y-8">
           {activeTab === "Music for Videos" && (
             <>
-              
+
               {/* Video Demo Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                 {[
@@ -194,7 +55,7 @@ export const SampleGallery: React.FC = () => {
                   {
                     title: "What has @Aoh been making recently?",
                     description: "",
-                    bgColor: "bg-gradient-to-br from-orange-500 via-red-500 to-purple-600", 
+                    bgColor: "bg-gradient-to-br from-orange-500 via-red-500 to-purple-600",
                     bgImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop&crop=center",
                     style: "music-video"
                   },
@@ -253,7 +114,7 @@ export const SampleGallery: React.FC = () => {
                         <div className="absolute inset-2 border border-emerald-400/30 rounded-xl animate-pulse"></div>
                       </>
                     )}
-                    
+
                     {/* Content */}
                     <div className="relative z-10">
                       <div className="flex justify-between items-start mb-2">
@@ -285,10 +146,10 @@ export const SampleGallery: React.FC = () => {
               </div>
             </>
           )}
-          
+
           {activeTab === "Music for Ads" && (
             <>
-              
+
               {/* Ad Demo Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                 {[
@@ -332,10 +193,10 @@ export const SampleGallery: React.FC = () => {
               </div>
             </>
           )}
-          
+
           {activeTab === "Music Editing" && (
             <>
-              
+
               {/* Editing Demo Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                 {[
@@ -379,10 +240,10 @@ export const SampleGallery: React.FC = () => {
               </div>
             </>
           )}
-          
+
           {activeTab === "Music Gift Cards" && (
             <>
-              
+
               {/* Gift Card Demo Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                 {[

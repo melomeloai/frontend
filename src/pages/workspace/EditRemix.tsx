@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { Play, Pause, Download, Upload, Settings, Share, RotateCcw, Volume2, Plus } from "lucide-react";
+import { Play, Pause, Download, Upload, RotateCcw, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 export const EditRemix: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState<string | null>("sample_track.mp3");
   const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [settings, setSettings] = useState({
