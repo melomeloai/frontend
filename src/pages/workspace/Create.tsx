@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth, RedirectToSignIn } from "@clerk/clerk-react";
 import { ROUTES } from "@/utils/constants";
 
 import { SampleGallery } from "@/components/landing/SampleGallery";
@@ -19,9 +20,16 @@ export const Create: React.FC = () => {
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [mode, setMode] = useState<"simple" | "custom" | "edit">("simple");
+  const [showSignIn, setShowSignIn] = useState(false);
   const navigate = useNavigate();
+  const { isSignedIn, isLoaded } = useAuth();
 
   const handleGenerate = async (params?: MusicGenerationParams) => {
+    if (!isSignedIn) {
+      setShowSignIn(true);
+      return;
+    }
+
     const finalPrompt = params?.prompt || prompt.trim();
     if (!finalPrompt) return;
 
@@ -50,6 +58,14 @@ export const Create: React.FC = () => {
       console.error("Failed to generate music:", error);
       setIsGenerating(false);
     }
+  };
+
+  const handleEditRemixClick = () => {
+    if (!isSignedIn) {
+      setShowSignIn(true);
+      return;
+    }
+    navigate(ROUTES.WORKSPACE_EDIT_REMIX);
   };
 
   return (
@@ -91,7 +107,7 @@ export const Create: React.FC = () => {
               Custom
             </button>
             <button
-              onClick={() => navigate(ROUTES.WORKSPACE_EDIT_REMIX)}
+              onClick={handleEditRemixClick}
               className="px-6 py-2 rounded-xl text-sm font-medium transition-all text-muted-foreground hover:text-foreground"
             >
               Edit & Remix
@@ -184,6 +200,9 @@ export const Create: React.FC = () => {
 
       {/* Sample Gallery */}
       <SampleGallery />
+
+      {/* Sign In Modal */}
+      {showSignIn && <RedirectToSignIn />}
     </div>
   );
 };

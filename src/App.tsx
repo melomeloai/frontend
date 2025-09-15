@@ -6,23 +6,27 @@ import {
 } from "react-router-dom";
 
 import { AuthCallback } from "@/components/auth/AuthCallback";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthenticatedLayout } from "@/layouts/AuthenticatedLayout";
 import { PublicLayout } from "@/layouts/PublicLayout";
 // Public pages
 import { Pricing } from "@/pages/public/Pricing";
+import { APIAccess } from "@/pages/workspace/APIAccess";
 // Workspace pages
 import { Create } from "@/pages/workspace/Create";
+import { EditRemix } from "@/pages/workspace/EditRemix";
 import { Library } from "@/pages/workspace/Library";
 import { Plan } from "@/pages/workspace/Plan";
 import { Project } from "@/pages/workspace/Project";
-import { APIAccess } from "@/pages/workspace/APIAccess";
-import { EditRemix } from "@/pages/workspace/EditRemix";
 import { SessionChat } from "@/pages/workspace/sessions/SessionChat";
 import { CLERK_APPEARANCE, ROUTES } from "@/utils/constants";
-import { ClerkProvider } from "@clerk/clerk-react";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn
+} from "@clerk/clerk-react";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -37,17 +41,7 @@ function App() {
         <Router>
           <div className="min-h-screen">
             <Routes>
-              {/* Default route - directly to Create */}
-              <Route
-                path={ROUTES.HOME}
-                element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <Create />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
-                }
-              />
+              {/* Public routes */}
               <Route
                 path={ROUTES.PRICING}
                 element={
@@ -57,7 +51,15 @@ function App() {
                 }
               />
 
-              {/* Workspace routes (protected) */}
+              {/* Create page - always with AuthenticatedLayout */}
+              <Route
+                path={ROUTES.HOME}
+                element={
+                  <AuthenticatedLayout>
+                    <Create />
+                  </AuthenticatedLayout>
+                }
+              />
               <Route
                 path={ROUTES.WORKSPACE}
                 element={<Navigate to={ROUTES.HOME} replace />}
@@ -69,61 +71,91 @@ function App() {
               <Route
                 path={ROUTES.WORKSPACE_LIBRARY}
                 element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <Library />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
+                  <>
+                    <SignedIn>
+                      <AuthenticatedLayout>
+                        <Library />
+                      </AuthenticatedLayout>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
                 }
               />
               <Route
                 path={ROUTES.WORKSPACE_PLAN}
                 element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <Plan />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
+                  <>
+                    <SignedIn>
+                      <AuthenticatedLayout>
+                        <Plan />
+                      </AuthenticatedLayout>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
                 }
               />
               <Route
                 path={ROUTES.WORKSPACE_API_ACCESS}
                 element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <APIAccess />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
+                  <>
+                    <SignedIn>
+                      <AuthenticatedLayout>
+                        <APIAccess />
+                      </AuthenticatedLayout>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
                 }
               />
               <Route
                 path={ROUTES.WORKSPACE_SESSION}
                 element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <SessionChat />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
+                  <>
+                    <SignedIn>
+                      <AuthenticatedLayout>
+                        <SessionChat />
+                      </AuthenticatedLayout>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
                 }
               />
               <Route
                 path={ROUTES.WORKSPACE_PROJECT}
                 element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <Project />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
+                  <>
+                    <SignedIn>
+                      <AuthenticatedLayout>
+                        <Project />
+                      </AuthenticatedLayout>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
                 }
               />
               <Route
                 path={ROUTES.WORKSPACE_EDIT_REMIX}
                 element={
-                  <ProtectedRoute>
-                    <AuthenticatedLayout>
-                      <EditRemix />
-                    </AuthenticatedLayout>
-                  </ProtectedRoute>
+                  <>
+                    <SignedIn>
+                      <AuthenticatedLayout>
+                        <EditRemix />
+                      </AuthenticatedLayout>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
                 }
               />
             </Routes>
